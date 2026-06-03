@@ -1,0 +1,2493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Village Verse – Empowering Your Community</title>
+  <meta name="description" content="Village Verse is a community-first Android application for rural India — connecting villagers with local administration, emergency services, SOS alerts, and complaint tracking." />
+  <meta name="keywords" content="Village Verse, rural app, community app, SOS alerts, emergency services, complaint tracking, India, village" />
+  <meta name="author" content="Village Verse Team" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph / Social Share Preview -->
+  <meta property="og:title" content="Village Verse – Empowering Your Community, Connected Locally" />
+  <meta property="og:description" content="Your one-stop app for local connection, comprehensive safety options, SOS alerts, verified profiles, and raising public voice in rural India." />
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/ffffff?text=Village+Verse" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://your-site.netlify.app" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Village Verse – Empowering Your Community" />
+  <meta name="twitter:description" content="Your one-stop app for local connection, SOS alerts, verified profiles, and public voice in rural India." />
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/ffffff?text=Village+Verse" />
+
+  <link href="style.css" rel="stylesheet" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Theme CSS Custom Properties (Official Way) ── */
+    :root {
+      --bg-body: #f8fafc;
+      --bg-connectivity: #f8fafc;
+      --bg-card: rgba(255, 255, 255, 0.85);
+      --border-card: rgba(255, 255, 255, 0.3);
+      --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.04);
+      --shadow-card-hover: 0 16px 48px rgba(37, 99, 235, 0.10);
+      --border-card-hover: rgba(37, 99, 235, 0.15);
+      --bg-header-scrolled: rgba(255, 255, 255, 0.95);
+      --shadow-header-scrolled: 0 8px 32px rgba(0, 0, 0, 0.08);
+      --bg-section-alt: rgba(255, 255, 255, 0.6);
+      --bg-gradient-from: #ffffff;
+      --bg-gradient-to: #f8fafc;
+      --bg-footer: rgba(255, 255, 255, 0.8);
+      --border-footer: #f1f5f9;
+    }
+    .dark {
+      --bg-body: #0b1120;
+      --bg-connectivity: #0b1120;
+      --bg-card: rgba(15, 23, 42, 0.85);
+      --border-card: rgba(148, 163, 184, 0.12);
+      --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
+      --shadow-card-hover: 0 16px 48px rgba(37, 99, 235, 0.15);
+      --border-card-hover: rgba(37, 99, 235, 0.25);
+      --bg-header-scrolled: rgba(15, 23, 42, 0.96);
+      --shadow-header-scrolled: 0 8px 32px rgba(0, 0, 0, 0.08);
+      --bg-section-alt: rgba(15, 23, 42, 0.4);
+      --bg-gradient-from: #0f172a;
+      --bg-gradient-to: #020617;
+      --bg-footer: #0f172a;
+      --border-footer: #1e293b;
+    }
+
+    /* ── Base ── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-body);
+      color: #0f172a;
+      overflow-x: hidden;
+    }
+
+    /* ── Connectivity-line background pattern ── */
+    .bg-connectivity {
+      position: relative;
+      background-color: var(--bg-connectivity);
+    }
+    .bg-connectivity::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(37, 99, 235, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.02) 0%, transparent 60%),
+        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L30 20 L50 15 L80 30' stroke='%232563eb' stroke-width='0.5' fill='none' opacity='0.07'/%3E%3Cpath d='M20 80 L40 60 L60 70 L90 55' stroke='%232563eb' stroke-width='0.5' fill='none' opacity='0.07'/%3E%3Cpath d='M5 45 L25 35 L55 50 L85 40' stroke='%232563eb' stroke-width='0.5' fill='none' opacity='0.06'/%3E%3Cpath d='M15 90 L35 80 L45 95 L75 85' stroke='%232563eb' stroke-width='0.5' fill='none' opacity='0.06'/%3E%3Ccircle cx='10' cy='10' r='1.5' fill='%232563eb' opacity='0.08'/%3E%3Ccircle cx='30' cy='20' r='1.5' fill='%232563eb' opacity='0.08'/%3E%3Ccircle cx='50' cy='15' r='1.5' fill='%232563eb' opacity='0.08'/%3E%3Ccircle cx='80' cy='30' r='1.5' fill='%232563eb' opacity='0.08'/%3E%3Ccircle cx='20' cy='80' r='1.5' fill='%232563eb' opacity='0.08'/%3E%3Ccircle cx='40' cy='60' r='1.5' fill='%232563eb' opacity='0.08'/%3E%3Ccircle cx='60' cy='70' r='1.5' fill='%232563eb' opacity='0.08'/%3E%3Ccircle cx='90' cy='55' r='1.5' fill='%232563eb' opacity='0.08'/%3E%3C/svg%3E");
+      background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+      background-size: auto, auto, auto, 120px 120px;
+    }
+    .bg-connectivity > * { position: relative; z-index: 1; }
+
+    /* ── Glass-morphism card ── */
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-card);
+      box-shadow: var(--shadow-card);
+    }
+    .glass-card:hover {
+      box-shadow: var(--shadow-card-hover);
+      border-color: var(--border-card-hover);
+      transform: translateY(-2px);
+    }
+    .glass-card,
+    .glass-card * { transition: all 0.3s ease; }
+
+    /* ── Phone mockup ── */
+    .phone-mockup {
+      width: 260px;
+      height: 530px;
+      background: #0f0f1a;
+      border-radius: 36px;
+      padding: 10px;
+      position: relative;
+      box-shadow:
+        0 0 0 2px #2a2a3a,
+        0 20px 60px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+      flex-shrink: 0;
+    }
+    .phone-mockup::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 18px;
+      background: #0f0f1a;
+      border-radius: 0 0 14px 14px;
+      z-index: 10;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.05);
+    }
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 28px;
+      background: #ffffff;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .phone-screen .status-bar {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 16px 6px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #1e293b;
+      background: #f1f5f9;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .phone-screen .status-bar .time { font-weight: 700; }
+    .phone-screen .status-bar .icons { display: flex; gap: 4px; align-items: center; }
+    .phone-screen .status-bar .icons svg { width: 14px; height: 14px; }
+
+    .phone-hero { min-width: 280px; height: 560px; }
+    .phone-feature { width: 220px; height: 450px; }
+    .phone-gallery { width: 230px; height: 470px; }
+
+    /* ── App UI Native Styling match ── */
+    .phone-app-navbar {
+      background: #f1f5f9;
+      padding: 10px 12px;
+      text-align: center;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .phone-app-navbar h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e40af;
+      font-style: italic;
+    }
+    .phone-app-footer {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 8px 4px;
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+    }
+    .phone-app-footer-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      color: #64748b;
+      cursor: pointer;
+    }
+    .phone-app-footer-item.active { color: #1e40af; }
+    .phone-app-footer-item span { font-size: 7px; font-weight: 600; }
+
+    .phone-content {
+      padding: 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      overflow-y: auto;
+    }
+    .phone-content::-webkit-scrollbar { display: none; }
+
+    /* ── FAQ Accordion System Styles ── */
+    .faq-item {
+      border-bottom: 1px solid #e2e8f0;
+      transition: border-color 0.3s ease;
+    }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #0f172a;
+      transition: color 0.3s ease;
+    }
+    .faq-toggle:hover { color: #2563eb; }
+    .faq-toggle .faq-arrow {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      color: #64748b;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+    }
+    .faq-item.open .faq-arrow {
+      transform: rotate(180deg);
+      color: #2563eb;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
+      padding: 0 24px;
+    }
+    .faq-answer-inner {
+      padding-bottom: 20px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #64748b;
+    }
+    .faq-item.open .faq-answer { max-height: 200px; }
+
+    /* ── Gallery scroll ── */
+    .scroll-gallery {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      padding: 12px 24px 32px;
+      margin: 0 -24px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scroll-padding: 24px;
+      -ms-overflow-style: none;
+    }
+
+    .scroll-gallery > * {
+      scroll-snap-align: center;
+      flex-shrink: 0;
+    }
+    /* Prevent drop-shadows from being clipped */
+    .scroll-gallery-wrapper {
+      overflow: visible;
+      position: relative;
+    }
+    .scroll-gallery .phone-mockup {
+      filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.06));
+    }
+    .dark .scroll-gallery .phone-mockup {
+      filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.25));
+    }
+    @media (max-width: 640px) {
+      .scroll-gallery { gap: 16px; padding: 12px 16px 28px; margin: 0 -16px; }
+      .scroll-gallery .phone-mockup { filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.05)); }
+    }
+
+    /* ── Logo mark ── */
+    .logo-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      border-radius: 10px;
+      color: #fff;
+      font-weight: 800;
+      font-size: 18px;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+
+    /* ── Feature icon circles ── */
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ── Mobile menu slide transition ── */
+    /* ── Mobile menu backdrop overlay ── */
+    #mobileBackdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 99998;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #mobileBackdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .dark #mobileBackdrop {
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    #mobileMenu {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 64px;
+      margin: 0 16px;
+      z-index: 99999;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-10px) scale(0.98);
+      padding: 0 16px;
+      border-radius: 20px;
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15);
+      pointer-events: none;
+    }
+    #mobileMenu.open {
+      max-height: 480px !important;
+      opacity: 1 !important;
+      transform: translateY(0) scale(1) !important;
+      padding: 20px 16px !important;
+      pointer-events: auto !important;
+    }
+    .dark #mobileMenu {
+      background: #1e293b !important;
+      border-color: rgba(148, 163, 184, 0.15);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    /* ── Responsive tweaks ── */
+    @media (max-width: 640px) {
+      .phone-hero { min-width: 200px; height: 420px; }
+      .phone-mockup { width: 180px; height: 370px; padding: 7px; border-radius: 24px; }
+      .phone-mockup::before { width: 80px; height: 12px; top: 6px; }
+      .phone-screen { border-radius: 18px; }
+      .phone-feature { width: 160px; height: 330px; }
+      .phone-gallery { width: 170px; height: 350px; }
+
+      .back-to-top {
+        width: 44px;
+        height: 44px;
+        bottom: 20px;
+        right: 20px;
+        border-radius: 14px;
+      }
+    }
+
+    /* ═══════════════════════════════════════
+        DARK MODE OVERRIDES
+       ═══════════════════════════════════════ */
+    .dark .bg-connectivity::before {
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(37, 99, 235, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.03) 0%, transparent 60%),
+        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L30 20 L50 15 L80 30' stroke='%2393c5fd' stroke-width='0.5' fill='none' opacity='0.12'/%3E%3Cpath d='M20 80 L40 60 L60 70 L90 55' stroke='%2393c5fd' stroke-width='0.5' fill='none' opacity='0.12'/%3E%3Cpath d='M5 45 L25 35 L55 50 L85 40' stroke='%2393c5fd' stroke-width='0.5' fill='none' opacity='0.10'/%3E%3Cpath d='M15 90 L35 80 L45 95 L75 85' stroke='%2393c5fd' stroke-width='0.5' fill='none' opacity='0.10'/%3E%3Ccircle cx='10' cy='10' r='1.5' fill='%2393c5fd' opacity='0.15'/%3E%3Ccircle cx='30' cy='20' r='1.5' fill='%2393c5fd' opacity='0.15'/%3E%3Ccircle cx='50' cy='15' r='1.5' fill='%2393c5fd' opacity='0.15'/%3E%3Ccircle cx='80' cy='30' r='1.5' fill='%2393c5fd' opacity='0.15'/%3E%3Ccircle cx='20' cy='80' r='1.5' fill='%2393c5fd' opacity='0.15'/%3E%3Ccircle cx='40' cy='60' r='1.5' fill='%2393c5fd' opacity='0.15'/%3E%3Ccircle cx='60' cy='70' r='1.5' fill='%2393c5fd' opacity='0.15'/%3E%3Ccircle cx='90' cy='55' r='1.5' fill='%2393c5fd' opacity='0.15'/%3E%3C/svg%3E");
+    }
+
+    .dark body { background-color: var(--bg-body); }
+    .dark .bg-connectivity { background-color: var(--bg-connectivity); }
+
+    .dark .glass-card {
+      background: var(--bg-card);
+      border-color: var(--border-card);
+      box-shadow: var(--shadow-card);
+    }
+    .dark .glass-card:hover {
+      box-shadow: var(--shadow-card-hover);
+      border-color: var(--border-card-hover);
+    }
+
+    .dark .bg-white\/60 { background-color: rgba(30, 41, 59, 0.7) !important; }
+    .dark .bg-white\/80 { background-color: rgba(15, 23, 42, 0.8) !important; }
+
+    /* Internal Phone dark configurations */
+    .dark .phone-screen { background: #0f172a !important; }
+    .dark .phone-screen .status-bar { background: #1e293b; border-color: #334155; }
+    .dark .phone-app-navbar { background: #1e293b; border-color: #334155; }
+    .dark .phone-app-footer { background: #1e293b; border-color: #334155; }
+
+    /* Dark Accordion Syncs */
+    .dark .faq-item { border-color: #1e293b; }
+
+    /* FAQ dark mode accordion contrast */
+    .dark .faq-toggle {
+      color: #ffffff !important;
+    }
+    .dark .faq-toggle:hover,
+    .dark .faq-item.open .faq-toggle {
+      color: #60a5fa !important;
+    }
+    .dark .faq-answer-inner {
+      color: #cbd5e1 !important;
+    }
+
+    /* High-contrast dark text for headings and phone mockups */
+    .dark h1,
+    .dark h2,
+    .dark h3,
+    .dark h4,
+    .dark h5,
+    .dark .text-slate-900,
+    .dark .phone-screen p,
+    .dark .gallery-caption {
+      color: #ffffff !important;
+    }
+
+    .dark p,
+    .dark .text-slate-500,
+    .dark .text-slate-400 {
+      color: #cbd5e1 !important;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-up { animation: fadeUp 0.6s ease-out forwards; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .animate-float { animation: float 4s ease-in-out infinite; }
+    .animate-float-delayed { animation: float 5s ease-in-out 0.5s infinite; }
+
+    /* ── Hero page-load stagger entrance animations ── */
+    .hero-stagger {
+      opacity: 0;
+      animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .hero-badge { animation-delay: 0.05s; }
+    .hero-heading { animation-delay: 0.15s; }
+    .hero-subtitle { animation-delay: 0.25s; }
+    .hero-buttons { animation-delay: 0.35s; }
+
+    .hero-phone-wrapper {
+      opacity: 0;
+      animation: heroSlideIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+    }
+    .hero-phone-wrapper .animate-float {
+      animation-delay: 1.4s;
+    }
+
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes heroSlideIn {
+      from { opacity: 0; transform: translateX(50px) scale(0.93); }
+      to   { opacity: 1; transform: translateX(0) scale(1); }
+    }
+
+    @keyframes heroGlow {
+      0% { opacity: 0; transform: scale(0.6); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Respect reduced-motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-stagger, .hero-phone-wrapper, .hero-glow { opacity: 1; animation: none; }
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -30%;
+      right: -5%;
+      width: 55%;
+      height: 160%;
+      background: radial-gradient(ellipse at center, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+      opacity: 0;
+      animation: heroGlow 1.2s ease-out 0.3s forwards;
+    }
+
+    /* ── Scroll-triggered reveal animations ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.revealed { opacity: 1; transform: translateY(0); }
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-scale.revealed { opacity: 1; transform: scale(1); }
+
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+
+    /* ── Back-to-top button ── */
+    .back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
+      z-index: 999;
+      opacity: 0;
+      transform: translateY(20px) scale(0.9);
+      pointer-events: none;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .back-to-top.visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+    .back-to-top:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 12px 32px rgba(37, 99, 235, 0.45); }
+
+    /* ── Gallery navigation dots ── */
+    .gallery-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .gallery-dot {
+      width: 10px !important;
+      height: 10px !important;
+      border-radius: 50% !important;
+      background: rgba(148, 163, 184, 0.4) !important;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      transition: background-color 0.3s ease, opacity 0.3s ease;
+      opacity: 0.6;
+    }
+    .gallery-dot.active {
+      width: 10px !important;
+      height: 10px !important;
+      border-radius: 50% !important;
+      background: #2563eb !important;
+      opacity: 1;
+    }
+    .dark .gallery-dot {
+      background: rgba(71, 85, 105, 0.5) !important;
+    }
+    .dark .gallery-dot.active {
+      background: #60a5fa !important;
+      opacity: 1;
+    }
+
+    header.scrolled .glass-card { background: var(--bg-header-scrolled); box-shadow: var(--shadow-header-scrolled); }
+    .dark header.scrolled .glass-card { background: var(--bg-header-scrolled); }
+
+    .nav-link.active { color: #2563eb !important; position: relative; }
+    .nav-link.active::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 2px; background: #2563eb; border-radius: 99px; }
+    .dark .nav-link.active::after { background: #60a5fa; }
+
+    /* Ripple Effect */
+    .ripple-btn { position: relative; overflow: hidden; }
+    .ripple-btn .ripple { position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.4); transform: scale(0); animation: rippleAnim 0.6s ease-out forwards; pointer-events: none; }
+    @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
+
+    /* ── Feedback / Comment System ── */
+    .feedback-card {
+      animation: feedbackSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes feedbackSlideIn {
+      from { opacity: 0; transform: translateY(16px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .feedback-card .delete-btn {
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .feedback-card:hover .delete-btn {
+      opacity: 1;
+    }
+    @media (max-width: 640px) {
+      .feedback-card .delete-btn {
+        opacity: 1;
+      }
+    }
+
+    .feedback-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 700;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+    .feedback-badge-blood {
+      background: #fef2f2;
+      color: #dc2626;
+      border: 1px solid #fecaca;
+    }
+    .dark .feedback-badge-blood {
+      background: rgba(220, 38, 38, 0.15);
+      border-color: rgba(220, 38, 38, 0.3);
+    }
+    .feedback-badge-verified {
+      background: #eff6ff;
+      color: #2563eb;
+      border: 1px solid #bfdbfe;
+    }
+    .dark .feedback-badge-verified {
+      background: rgba(37, 99, 235, 0.15);
+      border-color: rgba(37, 99, 235, 0.3);
+    }
+    .feedback-badge-regular {
+      background: #f8fafc;
+      color: #64748b;
+      border: 1px solid #e2e8f0;
+    }
+    .dark .feedback-badge-regular {
+      background: rgba(100, 116, 139, 0.15);
+      border-color: rgba(100, 116, 139, 0.25);
+    }
+
+    /* Feedback scrollbar */
+    #feedbackList::-webkit-scrollbar {
+      width: 4px;
+    }
+    #feedbackList::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    #feedbackList::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 99px;
+    }
+    .dark #feedbackList::-webkit-scrollbar-thumb {
+      background: #334155;
+    }
+
+    /* Feedback list smooth fade-in for new cards */
+    #feedbackList > .feedback-card {
+      animation: feedbackCardIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes feedbackCardIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    #feedbackList > .feedback-card:nth-child(2) { animation-delay: 0.08s; }
+    #feedbackList > .feedback-card:nth-child(3) { animation-delay: 0.16s; }
+
+    .dark .feedback-card {
+      border-color: rgba(148, 163, 184, 0.12);
+    }
+
+    /* ── Star Rating ── */
+    .star-rating {
+      display: inline-flex;
+      flex-direction: row-reverse;
+      gap: 2px;
+    }
+    .star-rating input {
+      display: none;
+    }
+    .star-rating label {
+      cursor: pointer;
+      color: #cbd5e1;
+      transition: color 0.15s ease, transform 0.15s ease;
+    }
+    .star-rating label svg {
+      width: 28px;
+      height: 28px;
+      transition: all 0.15s ease;
+    }
+    .star-rating label:hover svg,
+    .star-rating label:hover ~ label svg,
+    .star-rating input:checked ~ label svg {
+      color: #f59e0b;
+      fill: #f59e0b;
+    }
+    .star-rating label:hover svg {
+      transform: scale(1.15);
+    }
+    .star-rating input:checked ~ label svg {
+      fill: #f59e0b;
+      color: #f59e0b;
+    }
+    .dark .star-rating label:hover svg,
+    .dark .star-rating label:hover ~ label svg,
+    .dark .star-rating input:checked ~ label svg {
+      color: #fbbf24;
+      fill: #fbbf24;
+    }
+
+    /* Star display on comment cards */
+    .star-display {
+      display: inline-flex;
+      gap: 2px;
+      align-items: center;
+    }
+    .star-display svg {
+      width: 14px;
+      height: 14px;
+    }
+    .star-display .star-filled {
+      color: #f59e0b;
+      fill: #f59e0b;
+    }
+    .star-display .star-empty {
+      color: #cbd5e1;
+    }
+
+    /* Star rating label on form - clickable area */
+    .star-rating-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+    }
+    .star-rating-label {
+      font-size: 12px;
+      color: #94a3b8;
+      font-weight: 500;
+      min-width: 48px;
+    }
+
+    /* Average rating display */
+    .avg-rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #b45309;
+    }
+    .dark .avg-rating {
+      background: rgba(180, 83, 9, 0.15);
+      border-color: rgba(180, 83, 9, 0.3);
+    }
+    .avg-rating svg {
+      width: 14px;
+      height: 14px;
+      fill: #f59e0b;
+      color: #f59e0b;
+    }
+
+    /* Prevent mobile keyboard from pushing fixed elements */
+    input.mobile-input-fix, textarea.mobile-input-fix {
+      font-size: 16px !important;
+    }
+    @media (max-width: 640px) {
+      body.keyboard-open .back-to-top { display: none; }
+    }
+
+    /* Gallery phone caption outside mockup */
+    .gallery-caption {
+      text-align: center;
+      margin-top: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+
+    /* Dark mode: suppress white backgrounds on click/tap */
+    .dark * { -webkit-tap-highlight-color: transparent; }
+    .dark *:focus-visible {
+      outline: 2px solid #60a5fa;
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+    .dark .nav-link:focus-visible { border-radius: 8px; }
+    .dark .gallery-dot:focus-visible { outline-offset: 3px; }
+    .dark .ripple-btn .ripple { background: rgba(96, 165, 250, 0.25); }
+    .dark .faq-toggle:active,
+    .dark .ripple-btn:active,
+    .dark .nav-link:active,
+    .dark .gallery-dot:active,
+    .dark .back-to-top:active,
+    .dark .phone-app-footer-item:active,
+    .dark .deploy-badge-trigger:active {
+      background-color: transparent !important;
+    }
+
+    /* ── Deployment help badge ── */
+    .deploy-badge {
+      position: fixed;
+      bottom: 88px;
+      right: 28px;
+      z-index: 998;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .deploy-badge-trigger {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #e2e8f0;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+    }
+    .deploy-badge-trigger:hover {
+      background: rgba(15, 23, 42, 1);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+    .dark .deploy-badge-trigger {
+      background: rgba(226, 232, 240, 0.15);
+      border-color: rgba(148, 163, 184, 0.15);
+    }
+    .dark .deploy-badge-trigger:hover {
+      background: rgba(226, 232, 240, 0.2);
+    }
+    .deploy-badge.dismissed { opacity: 0; transform: scale(0.8); pointer-events: none; }
+
+    /* Deployment modal overlay */
+    .deploy-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .deploy-modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .deploy-modal {
+      background: #fff;
+      border-radius: 24px;
+      max-width: 480px;
+      width: 100%;
+      padding: 32px 28px 28px;
+      box-shadow: 0 32px 64px rgba(0, 0, 0, 0.2);
+      transform: translateY(20px) scale(0.95);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    .deploy-modal-overlay.open .deploy-modal {
+      transform: translateY(0) scale(1);
+    }
+    .dark .deploy-modal {
+      background: #1e293b;
+      border: 1px solid rgba(148, 163, 184, 0.12);
+    }
+    .deploy-modal h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .deploy-modal .subtitle {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 20px;
+    }
+    .deploy-step {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .dark .deploy-step { border-color: #1e293b; }
+    .deploy-step:last-child { border-bottom: none; }
+    .deploy-step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      background: #2563eb;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .deploy-step-content h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 2px;
+    }
+
+    .deploy-step-content p {
+      font-size: 11px;
+      color: #64748b;
+      line-height: 1.5;
+    }
+    .deploy-step-content code {
+      font-size: 10px;
+      background: #f1f5f9;
+      padding: 1px 6px;
+      border-radius: 4px;
+      color: #2563eb;
+      font-weight: 600;
+      font-family: 'Inter', monospace;
+    }
+    .dark .deploy-step-content code {
+      background: #0f172a;
+    }
+    .deploy-modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      border: none;
+      background: #f1f5f9;
+      color: #64748b;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .deploy-modal-close:hover { background: #e2e8f0; color: #0f172a; }
+    .dark .deploy-modal-close { background: #334155; }
+    .dark .deploy-modal-close:hover { background: #475569; }
+    .deploy-modal-dismiss {
+      width: 100%;
+      margin-top: 16px;
+      padding: 10px;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      background: transparent;
+      color: #64748b;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .deploy-modal-dismiss:hover { background: #f8fafc; border-color: #cbd5e1; color: #0f172a; }
+    .dark .deploy-modal-dismiss { border-color: #334155; }
+    .dark .deploy-modal-dismiss:hover { background: #1e293b; border-color: #475569; }
+
+    @media (max-width: 640px) {
+      .deploy-badge { bottom: 76px; right: 20px; }
+      .deploy-badge-trigger { padding: 6px 12px; font-size: 10px; }
+      .deploy-modal { padding: 24px 20px 20px; }
+    }
+
+    html.theme-transition * { transition: background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important; }
+    html.theme-transition *:active { transition: none !important; }
+    html.disable-transitions * { transition: none !important; }
+
+    /* ── Theme toggle icon spin animation ── */
+    @keyframes themeSpin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    .theme-spinning svg {
+      animation: themeSpin 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .theme-spinning svg { animation: none !important; }
+    }
+
+    /* ═══════════════════════════════════════
+        MOBILE RESPONSIVENESS IMPROVEMENTS
+       ═══════════════════════════════════════ */
+    body {
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      padding-left: env(safe-area-inset-left, 0px);
+      padding-right: env(safe-area-inset-right, 0px);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Better touch targets for mobile */
+    @media (pointer: coarse) {
+      .nav-link, .phone-app-footer-item, .gallery-dot, .faq-toggle, .deploy-badge-trigger {
+        min-height: 44px;
+      }
+      .delete-btn {
+        opacity: 1 !important;
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .star-rating label svg {
+        width: 34px;
+        height: 34px;
+      }
+      button, a.ripple-btn {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+      }
+    }
+
+    /* Small phone adjustments (under 400px) */
+    @media (max-width: 400px) {
+      .phone-hero { min-width: 160px; height: 350px; }
+      .phone-mockup { width: 150px; height: 310px; padding: 5px; border-radius: 20px; }
+      .phone-mockup::before { width: 60px; height: 10px; top: 4px; }
+      .phone-screen { border-radius: 16px; }
+      .phone-feature { width: 140px; height: 290px; }
+      .phone-gallery { width: 150px; height: 310px; }
+    }
+
+    /* Prevent horizontal overflow on small screens */
+    @media (max-width: 640px) {
+      .max-w-7xl, .max-w-4xl, .max-w-3xl {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+      }
+      .hero-heading {
+        font-size: 1.75rem !important;
+        line-height: 1.2 !important;
+      }
+      .hero-subtitle {
+        font-size: 0.95rem !important;
+      }
+      .hero-glow {
+        display: none;
+      }
+      #feedbackList {
+        max-height: 400px !important;
+      }
+      .feedback-card {
+        padding: 16px !important;
+      }
+      .star-rating-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+      .star-rating-label {
+        min-width: unset;
+      }
+      .lg\:gap-16, .lg\:gap-8, .gap-12 {
+        gap: 24px !important;
+      }
+      .feature-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 1.25rem;
+      }
+      .glass-card {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+      .back-to-top {
+        width: 44px;
+        height: 44px;
+        bottom: 16px;
+        right: 16px;
+      }
+    }
+
+    /* Ensure feedback section header wraps on small screens */
+    @media (max-width: 480px) {
+      .feedback-card .flex.items-start.justify-between {
+        flex-direction: column;
+      }
+      .star-rating label svg {
+        width: 28px;
+        height: 28px;
+      }
+    }
+
+    /* Portrait tablet and smaller landscape optimizations */
+    @media (max-height: 600px) {
+      #feedbackList {
+        max-height: 250px !important;
+      }
+    }
+
+
+
+    /* Prevent zoom on input focus for iOS */
+    input, textarea, select {
+      font-size: 16px !important;
+    }
+
+
+  </style>
+</head>
+<body>
+
+  <div class="bg-connectivity min-h-screen">
+
+    <header class="sticky top-0 z-50">
+      <div class="glass-card mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 sm:h-18">
+          <a href="#" class="flex items-center gap-3 group">
+            <span class="logo-mark transition-transform group-hover:scale-105">V</span>
+            <span class="hidden sm:block text-lg font-bold tracking-tight text-slate-900">
+              Village <span class="text-blue-600">Verse</span>
+            </span>
+          </a>
+
+          <nav class="hidden md:flex items-center gap-8">
+            <a href="#features" class="nav-link text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">Features</a>
+            <a href="#faq" class="nav-link text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">FAQ</a>
+            <a href="#feedback" class="nav-link text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">Feedback</a>
+            <a href="#screenshots" class="nav-link text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">Screenshots</a>
+            <a href="#about" class="nav-link text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">About</a>
+            
+            <button id="darkToggleDesktop" class="p-2 rounded-lg text-slate-500 hover:text-blue-600 hover:bg-slate-100 transition-all" aria-label="Toggle dark mode">
+              <svg id="moonIconDesktop" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/>
+              </svg>
+              <svg id="sunIconDesktop" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/>
+              </svg>
+            </button>
+            <a href="YOUR_DIRECT_APK_CLOUD_LINK" class="ripple-btn inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-blue-200 hover:shadow-blue-300 dark:shadow-blue-950/40 dark:hover:shadow-blue-900/50">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              Download APK
+            </a>
+          </nav>
+
+          <button id="menuBtn" class="md:hidden relative p-2 rounded-lg hover:bg-slate-100 transition-colors z-50" aria-label="Menu">
+            <svg class="w-6 h-6 text-slate-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </header>
+
+    <!-- Mobile menu backdrop overlay (outside header for proper fixed positioning) -->
+    <div id="mobileBackdrop" class="md:hidden"></div>
+
+    <div id="mobileMenu" class="md:hidden glass-card" style="position: fixed; left: 0; right: 0; top: 72px; margin: 0 16px; z-index: 999999; overflow: hidden; max-height: 0; opacity: 0; transform: translateY(-12px) scale(0.97); border-radius: 24px; box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12); transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;">
+        <nav class="flex flex-col gap-1 p-5 bg-transparent">
+          <a href="#features" class="mobile-nav-link flex items-center justify-center text-base font-bold px-4 py-3 rounded-xl transition-all" style="color: #0f172a !important;">Features</a>
+          <a href="#faq" class="mobile-nav-link flex items-center justify-center text-base font-bold px-4 py-3 rounded-xl transition-all" style="color: #0f172a !important;">FAQ</a>
+          <a href="#feedback" class="mobile-nav-link flex items-center justify-center text-base font-bold px-4 py-3 rounded-xl transition-all" style="color: #0f172a !important;">Feedback</a>
+          <a href="#screenshots" class="mobile-nav-link flex items-center justify-center text-base font-bold px-4 py-3 rounded-xl transition-all" style="color: #0f172a !important;">Screenshots</a>
+          <a href="#about" class="mobile-nav-link flex items-center justify-center text-base font-bold px-4 py-3 rounded-xl transition-all" style="color: #0f172a !important;">About</a>
+          <div class="h-px bg-slate-200/60 dark:bg-slate-700/60 my-2 mx-4"></div>
+          
+          <div class="flex justify-center w-full py-2">
+            <button id="darkToggleMobile" class="p-3 rounded-xl transition-all flex items-center justify-center text-xl hover:bg-slate-100 dark:hover:bg-slate-800" style="background: transparent; border: none; cursor: pointer; min-width: 48px; min-height: 48px;">
+              <span id="darkToggleIconMobile">🌙</span>
+            </button>
+          </div>
+        </nav>
+      </div>
+
+    <section class="relative overflow-hidden pt-10 pb-16 sm:pt-16 sm:pb-24">
+      <div class="hero-glow"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div class="text-center lg:text-left">
+            <span class="hero-stagger hero-badge inline-block px-4 py-1.5 mb-5 text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 rounded-full">
+              🚀 Active App Project v1.0.0
+            </span>
+            <h1 class="hero-stagger hero-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight">
+              Village Verse:<br />
+              <span class="text-blue-600">Empowering Your Community</span>, Connected Locally
+            </h1>
+            <p class="hero-stagger hero-subtitle mt-5 text-base sm:text-lg text-slate-500 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+              Your one-stop app for local connection, comprehensive safety options, and raising public voice.
+            </p>
+            <div class="hero-stagger hero-buttons mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <a href="YOUR_DIRECT_APK_CLOUD_LINK" class="ripple-btn w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-2xl transition-all shadow-xl shadow-blue-200 hover:shadow-blue-300 dark:shadow-blue-950/40 dark:hover:shadow-blue-900/50 hover:scale-[1.02] active:scale-[0.98]">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                Download APK (v1.0.0, 18MB)
+              </a>
+              <a href="#features" class="ripple-btn w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 text-slate-700 bg-white border border-slate-200 hover:border-blue-200 hover:text-blue-600 font-medium rounded-2xl transition-all shadow-sm hover:shadow-md">
+                Explore Features
+              </a>
+            </div>
+          </div>
+
+          <div class="flex justify-center lg:justify-end hero-phone-wrapper">
+            <div class="phone-mockup phone-hero animate-float">
+              <div class="phone-screen">
+                <div class="status-bar">
+                  <span class="time">12:30</span>
+                  <div class="icons">
+                    <span class="text-[9px]">5G</span>
+                    <svg class="w-3 h-3 fill-slate-800" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                  </div>
+                </div>
+                <div class="phone-app-navbar">
+                  <h4>Village Assistance</h4>
+                </div>
+                <div class="phone-content bg-slate-50 dark:bg-slate-900">
+                  <div class="bg-blue-500 rounded-2xl p-4 text-white shadow-md">
+                    <h5 class="text-sm font-bold">Good Afternoon, user 👋</h5>
+                    <p class="text-[9px] opacity-90 mt-1">How can we help you today?</p>
+                  </div>
+                  <p class="text-[10px] font-bold text-slate-700 mt-2">Emergency Services</p>
+                  <p class="text-[7px] text-slate-400 -mt-1.5">Tap to get immediate assistance</p>
+
+                  <div class="space-y-2 mt-1">
+                    <div class="flex items-center justify-between p-2.5 bg-rose-50 dark:bg-rose-950/40 rounded-xl border border-rose-200/60 shadow-sm">
+                      <div class="flex items-center gap-2.5">
+                        <span class="w-6 h-6 rounded-full bg-rose-500 flex items-center justify-center text-white text-[8px] font-black">SOS</span>
+                        <div>
+                          <p class="text-[9px] font-bold text-rose-700 dark:text-rose-400">SOS ALERTS</p>
+                          <p class="text-[6px] text-slate-400">Women and Child Safety</p>
+                        </div>
+                      </div>
+                      <span class="text-slate-400 text-xs">›</span>
+                    </div>
+
+                    <div class="flex items-center justify-between p-2.5 bg-red-50 dark:bg-red-950/40 rounded-xl border border-red-200/60 shadow-sm">
+                      <div class="flex items-center gap-2.5">
+                        <span class="w-6 h-6 rounded-full bg-red-500 flex items-center justify-center text-white text-[9px]">🚨</span>
+                        <div>
+                          <p class="text-[9px] font-bold text-red-700 dark:text-red-400">MEDICAL EMERGENCY</p>
+                          <p class="text-[6px] text-slate-400">Ambulance and Medical Help</p>
+                        </div>
+                      </div>
+                      <span class="text-slate-400 text-xs">›</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="phone-app-footer">
+                  <div class="phone-app-footer-item active"><span>✳</span><span>Alerts</span></div>
+                  <div class="phone-app-footer-item"><span>ℹ</span><span>Info</span></div>
+                  <div class="phone-app-footer-item"><span>📝</span><span>Complaint</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="py-16 sm:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <span class="inline-block px-4 py-1.5 mb-3 text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 rounded-full">Features</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Everything Your Village Needs</h2>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-20 reveal">
+          <div class="order-2 lg:order-1">
+            <div class="feature-icon bg-red-50 mb-4">🚨</div>
+            <h3 class="text-2xl font-bold text-slate-900">Quick Alerts & Safety</h3>
+            <p class="mt-3 text-slate-500 leading-relaxed max-w-md">Immediate access to critical emergency services. Call for SOS, medical help, or report missing persons at the tap of a button. Features women and child safety protocols.</p>
+          </div>
+          <div class="order-1 lg:order-2 flex justify-center animate-float-delayed">
+            <div class="phone-mockup phone-feature">
+              <div class="phone-screen">
+                <div class="status-bar"><span class="time">12:30</span><span class="text-[8px]">5G</span></div>
+                <div class="phone-app-navbar"><h4>Village Assistance</h4></div>
+                <div class="phone-content bg-slate-50 dark:bg-slate-900">
+                  <p class="text-[10px] font-bold text-slate-700">Emergency Services</p>
+                  <div class="space-y-2 mt-2">
+                    <div class="p-2.5 bg-rose-100 rounded-xl border border-rose-300 flex items-center gap-2">
+                      <span class="w-5 h-5 rounded-full bg-rose-500 flex items-center justify-center text-white text-[6px] font-bold">SOS</span>
+                      <div><p class="text-[8px] font-bold text-rose-900">SOS ALERTS</p><p class="text-[5px] text-slate-500">Women & Child Safety</p></div>
+                    </div>
+                    <div class="p-2.5 bg-orange-100 rounded-xl border border-orange-300 flex items-center gap-2">
+                      <span class="w-5 h-5 rounded-full bg-orange-500 flex items-center justify-center text-white text-[6px]">🔍</span>
+                      <div><p class="text-[8px] font-bold text-orange-900">MISSING PERSON ALERTS</p><p class="text-[5px] text-slate-500">Report and Track Missing People</p></div>
+                    </div>
+                    <div class="p-2.5 bg-red-100 rounded-xl border border-red-300 flex items-center gap-2">
+                      <span class="w-5 h-5 rounded-full bg-red-500 flex items-center justify-center text-white text-[6px]">🩸</span>
+                      <div><p class="text-[8px] font-bold text-red-900">Blood Bank</p><p class="text-[5px] text-slate-500">Find emergency blood donors nearby</p></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-20 reveal stagger-2">
+          <div class="flex justify-center animate-float">
+            <div class="phone-mockup phone-feature">
+              <div class="phone-screen">
+                <div class="status-bar"><span class="time">12:30</span><span class="text-[8px]">5G</span></div>
+                <div class="phone-app-navbar"><h4>Profile Setup</h4></div>
+                <div class="phone-content bg-white dark:bg-slate-900 px-3">
+                  <div class="w-14 h-14 rounded-full border-2 border-blue-500 border-dashed mx-auto flex flex-col items-center justify-center bg-blue-50 dark:bg-slate-800 mt-2">
+                    <span class="text-xs">📷</span><span class="text-[5px] font-bold text-blue-600">U</span>
+                  </div>
+                  <p class="text-[6px] text-center text-slate-400">Tap to add profile photo</p>
+                  
+                  <div class="space-y-1.5 mt-3">
+                    <div class="p-2 bg-slate-50 dark:bg-slate-800 rounded-lg text-[8px] text-slate-400 border border-slate-200 dark:border-slate-700">👤 Full Name</div>
+                    <div class="p-2 bg-slate-50 dark:bg-slate-800 rounded-lg text-[8px] text-slate-400 border border-slate-200 dark:border-slate-700">📞 Phone Number</div>
+                    <div class="p-2 bg-slate-50 dark:bg-slate-800 rounded-lg text-[8px] text-slate-400 border border-slate-200 dark:border-slate-700">🏢 Mandal</div>
+                    <div class="p-2 bg-slate-50 dark:bg-slate-800 rounded-lg text-[8px] text-slate-400 border border-slate-200 dark:border-slate-700">🏠 Village</div>
+                    <div class="p-2 bg-slate-50 dark:bg-slate-800 rounded-lg text-[8px] text-slate-400 border border-slate-200 dark:border-slate-700 flex justify-between"><span>🩸 Blood Group</span><span>▾</span></div>
+                    
+                    <div class="p-2 bg-slate-50 dark:bg-slate-800 rounded-lg text-[7px] font-semibold flex justify-between items-center border border-slate-200 dark:border-slate-700">
+                      <span>Available to Donate Blood?</span>
+                      <span class="w-6 h-3 bg-slate-300 rounded-full inline-block relative"><span class="w-2.5 h-2.5 bg-white rounded-full absolute top-px left-px shadow"></span></span>
+                    </div>
+                  </div>
+                  <button class="w-full bg-blue-600 text-white rounded-xl py-2 font-bold text-[9px] mt-2 shadow-sm">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="feature-icon bg-green-50 mb-4">🏘️</div>
+            <h3 class="text-2xl font-bold text-slate-900">Verified Profile & Community Identity</h3>
+            <p class="mt-3 text-slate-500 leading-relaxed max-w-md">Build a clean, localization-based profile with mandatory fields for your specific Mandal and Village setup. Instantly opt-in for blood donor directories to assist neighbors dynamically.</p>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-20 reveal stagger-3">
+          <div class="order-2 lg:order-1">
+            <div class="feature-icon bg-blue-50 mb-4">💬</div>
+            <h3 class="text-2xl font-bold text-slate-900">Community Voice & Posts</h3>
+            <p class="mt-3 text-slate-500 leading-relaxed max-w-md">Share updates, browse announcements from local administrators, or compose neighborhood alerts instantly with the embedded posting tools.</p>
+          </div>
+          <div class="order-1 lg:order-2 flex justify-center animate-float-delayed">
+            <div class="phone-mockup phone-feature">
+              <div class="phone-screen">
+                <div class="status-bar"><span class="time">12:30</span><span class="text-[8px]">5G</span></div>
+                <div class="phone-app-navbar"><h4>Community Posts</h4></div>
+                <div class="phone-content bg-white dark:bg-slate-900 justify-center items-center text-center">
+                  <div class="text-3xl text-slate-300">📄</div>
+                  <p class="text-[10px] font-bold text-slate-700 mt-2">No Community Posts Yet</p>
+                  <p class="text-[7px] text-slate-400">No community posts yet</p>
+                  <button class="bg-blue-600 text-white text-[8px] font-bold px-4 py-1.5 rounded-xl mt-3 shadow-md">+ Create Post</button>
+                </div>
+                <div class="phone-app-footer">
+                  <div class="phone-app-footer-item"><span>✳</span><span>Alerts</span></div>
+                  <div class="phone-app-footer-item active"><span>ℹ</span><span>Info</span></div>
+                  <div class="phone-app-footer-item"><span>📝</span><span>Complaint</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center reveal">
+          <div class="flex justify-center animate-float">
+            <div class="phone-mockup phone-feature">
+              <div class="phone-screen">
+                <div class="status-bar"><span class="time">12:30</span><span class="text-[8px]">5G</span></div>
+                <div class="phone-app-navbar"><h4>Village Assistance</h4></div>
+                <div class="phone-content bg-white dark:bg-slate-900 px-3">
+                  <p class="text-[11px] font-bold text-blue-900 text-center">Complaints Dashboard</p>
+                  <div class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 rounded-lg p-1.5 mt-1 text-[7px] text-slate-400">🔍 Search complaints...</div>
+                  
+                  <div class="flex gap-1 mt-2 overflow-x-auto py-0.5">
+                    <span class="bg-blue-100 text-blue-700 text-[6px] font-bold px-2 py-0.5 rounded-md border border-blue-200">✓ All</span>
+                    <span class="bg-slate-50 text-slate-500 text-[6px] px-2 py-0.5 rounded-md border border-slate-200">Pending</span>
+                    <span class="bg-slate-50 text-slate-500 text-[6px] px-2 py-0.5 rounded-md border border-slate-200">Reviewing</span>
+                    <span class="bg-slate-50 text-slate-500 text-[6px] px-2 py-0.5 rounded-md border border-slate-200">In Progress</span>
+                  </div>
+
+                  <div class="flex-1 flex flex-col justify-center items-center text-center opacity-60 mt-4">
+                    <span class="text-3xl">📭</span>
+                    <p class="text-[9px] font-bold text-slate-700 mt-2">No complaints available</p>
+                    <p class="text-[6px] text-slate-400 max-w-[140px] mx-auto">Complaints from your village and mandal will appear here</p>
+                  </div>
+                </div>
+                <div class="phone-app-footer">
+                  <div class="phone-app-footer-item"><span>✳</span><span>Alerts</span></div>
+                  <div class="phone-app-footer-item"><span>ℹ</span><span>Info</span></div>
+                  <div class="phone-app-footer-item active"><span>📝</span><span>Complaint</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="feature-icon bg-amber-50 mb-4">📋</div>
+            <h3 class="text-2xl font-bold text-slate-900">Transparent Grievance Tracking</h3>
+            <p class="mt-3 text-slate-500 leading-relaxed max-w-md">Log infrastructure or civic issues easily. Track items through filter views like "Pending", "Reviewing", or "In Progress" directly customized to your selected local jurisdiction.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="faq" class="py-16 sm:py-24 reveal">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <span class="inline-block px-4 py-1.5 mb-3 text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 rounded-full">FAQ</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
+          <p class="mt-3 text-slate-500 max-w-xl mx-auto">Everything you need to know about Village Verse</p>
+        </div>
+        <div class="glass-card rounded-2xl overflow-hidden divide-y divide-slate-100" id="faqAccordion">
+
+          <div class="faq-item open">
+            <button class="faq-toggle" aria-expanded="true">
+              <span>What is Village Verse and how does it work?</span>
+              <span class="faq-arrow text-slate-400 text-lg transition-transform duration-300">▼</span>
+            </button>
+            <div class="faq-answer style="max-height: 200px;"">
+              <div class="faq-answer-inner">
+                Village Verse is a community-first Android application designed for rural India. It connects villagers with local administration, emergency services, and neighbors — all in one secure platform. From SOS alerts and verified profiles to community discussions and transparent complaint tracking, every feature is built with grassroots communities in mind.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-toggle" aria-expanded="false">
+              <span>Is the app free to download and use?</span>
+              <span class="faq-arrow text-slate-400 text-lg transition-transform duration-300">▼</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Yes, Village Verse is completely free to download and use. There are no hidden charges, subscription fees, or in-app purchases required. Simply download the APK, enable installation from unknown sources in your device settings, and you're ready to go.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-toggle" aria-expanded="false">
+              <span>How do I use the SOS emergency feature?</span>
+              <span class="faq-arrow text-slate-400 text-lg transition-transform duration-300">▼</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                The SOS feature provides one-tap access to emergency services including medical ambulances, fire departments, and police. It automatically shares your live location with responders. The app also includes dedicated women and child safety protocols, a missing person reporting system, and a safety status dashboard that shows real-time alerts in your area.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-toggle" aria-expanded="false">
+              <span>Is my personal data safe and private?</span>
+              <span class="faq-arrow text-slate-400 text-lg transition-transform duration-300">▼</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Absolutely. Privacy is at the core of Village Verse. Your personal data is encrypted both in transit and at rest. We never share your information with third parties without your explicit consent. Profile details like your village, mandal, and blood group are only visible to verified community members you choose to connect with.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-toggle" aria-expanded="false">
+              <span>How do I file a complaint about village services?</span>
+              <span class="faq-arrow text-slate-400 text-lg transition-transform duration-300">▼</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                You can file complaints directly through the Complaints section in the app. Choose from categories like road repair, water supply, street lighting, sanitation, and more. Each complaint receives a unique tracking ID, and you can monitor its progress in real-time — from submission to resolution. Your voice drives accountability.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-toggle" aria-expanded="false">
+              <span>How do I join the blood donor network?</span>
+              <span class="faq-arrow text-slate-400 text-lg transition-transform duration-300">▼</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Joining the blood donor network is easy. Complete your profile in the app, including your blood group, and opt-in to become a donor. You'll be connected with others in your village and nearby areas who need blood donations. The network shows how many members are near you, making it easy to save lives in your community.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-toggle" aria-expanded="false">
+              <span>Can I use Village Verse offline?</span>
+              <span class="faq-arrow text-slate-400 text-lg transition-transform duration-300">▼</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Core features like your profile, emergency contacts, and saved complaints are available offline. Community posts, alerts, and updates will sync automatically when you reconnect to the internet. This ensures you always have access to critical information, even in areas with limited connectivity.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Feedback & Community Reviews ── -->
+    <section id="feedback" class="py-16 sm:py-24 reveal">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <span class="inline-block px-4 py-1.5 mb-3 text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 rounded-full">Feedback</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">What Our Community Is Saying</h2>
+          <p class="mt-2 text-slate-500 text-sm max-w-xl mx-auto">Real reviews and discussions from verified villagers.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-5 gap-8 items-start">
+          <!-- Left / Top: Comment Form -->
+          <div class="lg:col-span-2">
+            <div class="glass-card rounded-2xl p-5 sm:p-8">
+              <div class="flex items-center gap-3 mb-5">
+                <div class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-slate-900">Share Your Review</h3>
+                  <p class="text-xs text-slate-400">Help us improve the community</p>
+                </div>
+              </div>
+              <form id="feedbackForm" class="space-y-4 sm:space-y-5">
+                <div>
+                  <label for="feedbackName" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Your Name</label>
+                  <input
+                    type="text"
+                    id="feedbackName"
+                    placeholder="Enter your full name..."
+                    maxlength="50"
+                    class="w-full px-4 py-3 sm:py-3.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 dark:placeholder-slate-500 mobile-input-fix"
+                  />
+                </div>
+                <div>
+                  <label for="feedbackVillage" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Village / Mandal</label>
+                  <input
+                    type="text"
+                    id="feedbackVillage"
+                    placeholder="e.g. Sadashivpet, Sangareddy..."
+                    maxlength="60"
+                    class="w-full px-4 py-3 sm:py-3.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 dark:placeholder-slate-500 mobile-input-fix"
+                  />
+                </div>
+                <div class="star-rating-wrapper">
+                  <span class="star-rating-label">Rating</span>
+                  <div class="star-rating" id="starRating">
+                    <input type="radio" id="star5" name="rating" value="5" />
+                    <label for="star5" title="5 stars">
+                      <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </label>
+                    <input type="radio" id="star4" name="rating" value="4" />
+                    <label for="star4" title="4 stars">
+                      <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </label>
+                    <input type="radio" id="star3" name="rating" value="3" />
+                    <label for="star3" title="3 stars">
+                      <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </label>
+                    <input type="radio" id="star2" name="rating" value="2" />
+                    <label for="star2" title="2 stars">
+                      <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </label>
+                    <input type="radio" id="star1" name="rating" value="1" />
+                    <label for="star1" title="1 star">
+                      <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </label>
+                  </div>
+                  <span id="ratingLabel" class="text-xs text-slate-400 font-medium">Tap to rate</span>
+                </div>
+                <div>
+                  <label for="feedbackMsg" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Your Feedback</label>
+                  <textarea
+                    id="feedbackMsg"
+                    rows="4"
+                    placeholder="Write your thoughts about Village Verse..."
+                    maxlength="500"
+                    class="w-full px-4 py-3 sm:py-3.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 dark:placeholder-slate-500 mobile-input-fix"
+                  ></textarea>
+                  <div class="flex justify-between items-center mt-1.5">
+                    <span id="feedbackCharCount" class="text-xs text-slate-400">0 / 500</span>
+                    <span id="feedbackError" class="text-xs text-red-500 hidden"></span>
+                  </div>
+                </div>
+                <button
+                  id="feedbackSubmitBtn"
+                  class="ripple-btn w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm rounded-xl transition-all shadow-lg shadow-blue-200 hover:shadow-blue-300 dark:shadow-blue-950/40 dark:hover:shadow-blue-900/50 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20.016l-8.016-8.016 1.406-1.406L12 17.203l6.61-6.609 1.406 1.406L12 20.016zM12 12.016l-8.016-8.016 1.406-1.406L12 9.203l6.61-6.609 1.406 1.406L12 12.016z"/></svg>
+                  Submit Feedback
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Right / Bottom: Comment List -->
+          <div class="lg:col-span-3">
+            <div class="flex items-center justify-between mb-5">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900">Community Reviews</h3>
+                <div class="flex items-center gap-2 mt-1">
+                  <p class="text-xs text-slate-400" id="feedbackCount">Loading comments...</p>
+                  <span id="avgRatingDisplay" class="avg-rating hidden">
+                    <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <span id="avgRatingValue">0.0</span>
+                  </span>
+                </div>
+              </div>
+              <div class="flex gap-1">
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-green-50 border border-green-200 rounded-full text-[10px] font-semibold text-green-700 dark:bg-green-900/30 dark:border-green-800 dark:text-green-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                  Live
+                </span>
+
+              </div>
+            </div>
+
+            <div id="feedbackList" class="space-y-4 max-h-[580px] overflow-y-auto pr-1 scroll-smooth">
+              <!-- Comments rendered by JavaScript -->
+              <div id="feedbackEmpty" class="glass-card rounded-2xl p-8 text-center">
+                <div class="text-4xl mb-3 opacity-40">💬</div>
+                <p class="text-slate-500 font-medium">No reviews yet. Be the first to share your thoughts!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="screenshots" class="py-16 sm:py-24 bg-white/60 dark:bg-slate-900/40 reveal">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+          <span class="inline-block px-4 py-1.5 mb-3 text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 rounded-full">Gallery</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">App Interface Showcase</h2>
+          <p class="mt-2 text-slate-500 text-sm">Scroll horizontally to overview the verified operational layout</p>
+        </div>
+
+        <div class="scroll-gallery-wrapper">
+        <div class="scroll-gallery" id="scrollGallery">
+          <div class="flex flex-col items-center flex-shrink-0">
+            <div class="phone-mockup phone-gallery">
+              <div class="phone-screen">
+                <div class="status-bar"><span class="time">9:41</span><span class="text-[7px] text-blue-600 font-bold">✓ Connected</span></div>
+                <div class="phone-app-navbar"><h4>Profile Setup</h4></div>
+                <div class="phone-content bg-slate-50 dark:bg-slate-900 p-3">
+                  <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-slate-800 mx-auto mt-2 border-2 border-blue-600 flex items-center justify-center text-blue-600 text-lg font-bold">U</div>
+                  <p class="text-[5px] text-center text-slate-400 mt-1">Tap to change profile picture</p>
+                  <div class="space-y-2 mt-4">
+                    <div class="bg-white dark:bg-slate-800 p-2 border rounded-md text-[7px] text-slate-500">👤 Full Name</div>
+                    <div class="bg-white dark:bg-slate-800 p-2 border rounded-md text-[7px] text-slate-500">📞 Phone Number</div>
+                    <div class="bg-white dark:bg-slate-800 p-2 border rounded-md text-[7px] text-slate-500">🏢 Mandal</div>
+                    <div class="bg-white dark:bg-slate-800 p-2 border rounded-md text-[7px] text-slate-500">🏠 Village</div>
+                    <div class="bg-white dark:bg-slate-800 p-2 border rounded-md text-[7px] text-slate-500 flex justify-between"><span>🩸 Blood Group</span><span>▾</span></div>
+                  </div>
+                  <button class="w-full bg-blue-600 text-white rounded-lg py-2 mt-4 text-[8px] font-bold shadow">Save</button>
+                </div>
+              </div>
+            </div>
+            <div class="gallery-caption">Profile Interface</div>
+          </div>
+
+          <div class="flex flex-col items-center flex-shrink-0">
+            <div class="phone-mockup phone-gallery">
+              <div class="phone-screen">
+                <div class="status-bar"><span class="time">9:41</span><span class="text-[7px]">5G</span></div>
+                <div class="phone-app-navbar"><h4>Village Assistance</h4></div>
+                <div class="phone-content bg-slate-50 dark:bg-slate-900">
+                  <div class="bg-gradient-to-r from-blue-500 to-indigo-600 p-3 rounded-xl text-white">
+                    <p class="text-[10px] font-bold">Good Afternoon, user 👋</p>
+                    <p class="text-[6px] opacity-80">How can we help you today?</p>
+                  </div>
+                  <div class="space-y-1.5 mt-2">
+                    <div class="p-2 bg-rose-50 dark:bg-rose-950/20 border border-rose-300 rounded-lg flex justify-between text-[7px] font-bold text-rose-700"><span>🆘 SOS ALERTS</span><span>›</span></div>
+                    <div class="p-2 bg-red-50 dark:bg-red-950/20 border border-red-300 rounded-lg flex justify-between text-[7px] font-bold text-red-700"><span>🚨 MEDICAL EMERGENCY</span><span>›</span></div>
+                    <div class="p-2 bg-amber-50 dark:bg-amber-950/20 border border-amber-300 rounded-lg flex justify-between text-[7px] font-bold text-amber-700"><span>👤 MISSING PERSON ALERTS</span><span>›</span></div>
+                    <div class="p-2 bg-rose-50 dark:bg-rose-950/20 border border-rose-300 rounded-lg flex justify-between text-[7px] font-bold text-rose-800"><span>🩸 Blood Bank</span><span>›</span></div>
+                    <div class="p-2 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-300 rounded-lg flex justify-between text-[7px] font-bold text-emerald-700"><span>📞 EMERGENCY CONTACTS</span><span>›</span></div>
+                  </div>
+                </div>
+                <div class="phone-app-footer">
+                  <div class="phone-app-footer-item active"><span>✳</span><span>Alerts</span></div>
+                  <div class="phone-app-footer-item"><span>ℹ</span><span>Info</span></div>
+                  <div class="phone-app-footer-item"><span>📝</span><span>Complaint</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="gallery-caption">Assistance Central</div>
+          </div>
+
+          <div class="flex flex-col items-center flex-shrink-0">
+            <div class="phone-mockup phone-gallery">
+              <div class="phone-screen">
+                <div class="status-bar"><span class="time">9:41</span><span class="text-[7px]">5G</span></div>
+                <div class="phone-app-navbar"><h4>Community Posts</h4></div>
+                <div class="phone-content bg-slate-50 dark:bg-slate-900 justify-center items-center text-center">
+                  <span class="text-2xl opacity-40">📄</span>
+                  <p class="text-[9px] font-bold mt-1">No Community Posts Yet</p>
+                  <button class="bg-blue-600 text-white rounded-md text-[7px] font-bold px-3 py-1 mt-2">+ Create Post</button>
+                </div>
+                <div class="phone-app-footer">
+                  <div class="phone-app-footer-item"><span>✳</span><span>Alerts</span></div>
+                  <div class="phone-app-footer-item active"><span>ℹ</span><span>Info</span></div>
+                  <div class="phone-app-footer-item"><span>📝</span><span>Complaint</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="gallery-caption">Feed Engine</div>
+          </div>
+
+          <div class="flex flex-col items-center flex-shrink-0">
+            <div class="phone-mockup phone-gallery">
+              <div class="phone-screen">
+                <div class="status-bar"><span class="time">9:41</span><span class="text-[7px]">5G</span></div>
+                <div class="phone-app-navbar"><h4>Village Assistance</h4></div>
+                <div class="phone-content bg-slate-50 dark:bg-slate-900">
+                  <p class="text-[10px] font-bold text-center text-slate-700">Complaints Dashboard</p>
+                  <div class="border rounded-md p-1 bg-white dark:bg-slate-800 text-[7px] text-slate-400 mt-1">Search complaints...</div>
+                  <div class="flex gap-1 mt-1.5 overflow-x-auto text-[5px]">
+                    <span class="bg-blue-500 text-white px-2 py-0.5 rounded">✓ All</span>
+                    <span class="bg-slate-100 text-slate-600 px-2 py-0.5 rounded">Pending</span>
+                    <span class="bg-slate-100 text-slate-600 px-2 py-0.5 rounded">Reviewing</span>
+                  </div>
+                  <div class="flex-1 flex flex-col justify-center items-center opacity-40 text-center mt-6">
+                    <span class="text-2xl">📥</span>
+                    <p class="text-[8px] font-bold">No complaints available</p>
+                  </div>
+                </div>
+                <div class="phone-app-footer">
+                  <div class="phone-app-footer-item"><span>✳</span><span>Alerts</span></div>
+                  <div class="phone-app-footer-item"><span>ℹ</span><span>Info</span></div>
+                  <div class="phone-app-footer-item active"><span>📝</span><span>Complaint</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="gallery-caption">Grievance Dashboard</div>
+          </div>
+        </div>
+        </div>
+        <div class="gallery-dots" id="galleryDots"></div>
+      </div>
+    </section>
+
+    <section id="about" class="py-16 sm:py-24">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="inline-block px-4 py-1.5 mb-3 text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 rounded-full">About</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 reveal">Engineered for Rural Advancement</h2>
+        <p class="mt-4 text-slate-500 leading-relaxed max-w-xl mx-auto text-sm">
+          Village Verse acts as a core connecting asset for rural networks across India, prioritizing data security, localized utility configurations, and rapid emergency alerts deployment.
+        </p>
+
+        <div class="grid sm:grid-cols-3 gap-6 mt-12">
+          <div class="glass-card rounded-2xl p-6 text-center reveal-scale stagger-1">
+            <h4 class="text-2xl font-black text-blue-600"><span class="stat-number" data-target="5000" data-suffix="+">0</span></h4>
+            <p class="text-xs font-bold text-slate-800 mt-2">Active Users</p>
+            <p class="text-[11px] text-slate-400 mt-1">Expanding community profiles setup</p>
+          </div>
+          <div class="glass-card rounded-2xl p-6 text-center reveal-scale stagger-2">
+            <h4 class="text-2xl font-black text-emerald-500">24/7</h4>
+            <p class="text-xs font-bold text-slate-800 mt-2">SOS Support</p>
+            <p class="text-[11px] text-slate-400 mt-1">Instant continuous alert routing</p>
+          </div>
+          <div class="glass-card rounded-2xl p-6 text-center reveal-scale stagger-3">
+            <h4 class="text-2xl font-black text-amber-500">100%</h4>
+            <p class="text-xs font-bold text-slate-800 mt-2">Privacy First</p>
+            <p class="text-[11px] text-slate-400 mt-1">Local encrypted database variables</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="download" class="py-16 sm:py-24 bg-gradient-to-b from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 reveal">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="glass-card rounded-3xl p-8 sm:p-12 md:p-16">
+          <span class="inline-block px-4 py-1.5 mb-4 text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 rounded-full">Get Started</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
+            Ready to secure your <span class="text-blue-600">Village Verse</span> connection?
+          </h2>
+          <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="YOUR_DIRECT_APK_CLOUD_LINK" class="ripple-btn w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg rounded-2xl transition-all shadow-xl shadow-blue-200 hover:shadow-blue-300 dark:shadow-blue-950/40 dark:hover:shadow-blue-900/50">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              Download APK (v1.0.0, 18MB)
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Deploy help badge (dev only) ── -->
+    <div id="deployBadge" class="deploy-badge">
+      <button id="deployTrigger" class="deploy-badge-trigger" aria-label="Deployment help">
+        <span>⚡</span>
+        <span>Deploy Ready</span>
+        <svg class="w-3 h-3 opacity-60" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+
+    <button id="backToTop" class="back-to-top" aria-label="Scroll to top">
+      <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m0 0l-7 7m7-7l7 7"/></svg>
+    </button>
+
+    <footer class="border-t border-slate-100 bg-white/80 dark:bg-slate-950 dark:border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <span class="logo-mark text-sm">V</span>
+          <span class="text-sm font-bold text-slate-700 dark:text-slate-300">Village <span class="text-blue-600">Verse</span></span>
+        </div>
+        <p class="text-xs text-slate-400">
+          &copy; 2026 Village Verse. Dedicated local administrative system utility.
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ── Deployment help modal overlay ── -->
+  <div id="deployModalOverlay" class="deploy-modal-overlay">
+    <div class="deploy-modal">
+      <button id="deployModalClose" class="deploy-modal-close" aria-label="Close modal">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <h3>🚀 Deploy to Production</h3>
+      <p class="subtitle">This single HTML file is ready for zero-configuration hosting.</p>
+
+      <div class="deploy-step">
+        <span class="deploy-step-num">1</span>
+        <div class="deploy-step-content">
+          <h4>Option A — Netlify (Drag & Drop)</h4>
+          <p>Go to <strong>netlify.com</strong> → Log in → Drag <code>index.html</code> onto the deploy area. Your site goes live instantly at a <code>*.netlify.app</code> URL.</p>
+        </div>
+      </div>
+
+      <div class="deploy-step">
+        <span class="deploy-step-num">2</span>
+        <div class="deploy-step-content">
+          <h4>Option B — GitHub Pages</h4>
+          <p>Push this file to a GitHub repo → Settings → Pages → Deploy from <code>main</code> branch. Your site will be available at <code>your-username.github.io/repo-name</code>.</p>
+        </div>
+      </div>
+
+      <div class="deploy-step">
+        <span class="deploy-step-num">3</span>
+        <div class="deploy-step-content">
+          <h4>Option C — Vercel</h4>
+          <p>Go to <strong>vercel.com</strong> → Import project → Select this file. Vercel auto-detects static HTML and deploys with a CDN-backed <code>*.vercel.app</code> link.</p>
+        </div>
+      </div>
+
+      <p class="subtitle" style="margin-top: 12px;"><strong>Before deploying:</strong> Replace <code>YOUR_DIRECT_APK_CLOUD_LINK</code> with your actual APK download URL (Google Drive, GitHub Releases, etc.).</p>
+
+      <button id="deployDismissPermanent" class="deploy-modal-dismiss">
+        Don't show this again
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // ─── Dark mode manager ───
+    const darkMode = {
+      key: 'village-verse-theme',
+      init() {
+        const stored = localStorage.getItem(this.key);
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const isDark = stored === 'dark' || (!stored && prefersDark);
+        document.documentElement.classList.add('disable-transitions');
+        this.apply(isDark);
+        this.updateUI(isDark);
+        requestAnimationFrame(() => { document.documentElement.classList.remove('disable-transitions'); });
+      },
+      apply(isDark) { document.documentElement.classList.toggle('dark', isDark); },
+      toggle() {
+        const isDark = !document.documentElement.classList.contains('dark');
+        // Add spin animation to the toggle button icon
+        const dt = document.getElementById('darkToggleDesktop');
+        if (dt) { dt.classList.add('theme-spinning'); }
+        const dm = document.getElementById('darkToggleMobile');
+        if (dm) { dm.classList.add('theme-spinning'); }
+
+        document.documentElement.classList.add('theme-transition');
+        this.apply(isDark);
+        localStorage.setItem(this.key, isDark ? 'dark' : 'light');
+        this.updateUI(isDark);
+        setTimeout(() => {
+          document.documentElement.classList.remove('theme-transition');
+          if (dt) { dt.classList.remove('theme-spinning'); }
+          if (dm) { dm.classList.remove('theme-spinning'); }
+        }, 500);
+      },
+      updateUI(isDark) {
+        const show = (el) => { if (el) el.classList.remove('hidden'); };
+        const hide = (el) => { if (el) el.classList.add('hidden'); };
+        const m = document.getElementById('moonIconDesktop');
+        const s = document.getElementById('sunIconDesktop');
+
+        // Handle desktop icons
+        if (isDark) { hide(m); show(s); } else { show(m); hide(s); }
+
+        // Dynamic Glass-morphism Theme Engine for Phone View Card
+        const mm = document.getElementById('mobileMenu');
+        if (mm) {
+          mm.style.setProperty('background', isDark ? 'rgba(15, 23, 42, 0.85)' : 'rgba(255, 255, 255, 0.85)', 'important');
+          mm.style.backdropFilter = 'blur(12px)';
+          mm.style.webkitBackdropFilter = 'blur(12px)';
+          mm.style.setProperty('border-color', isDark ? 'rgba(148, 163, 184, 0.12)' : 'rgba(255, 255, 255, 0.3)', 'important');
+          mm.style.setProperty('box-shadow', isDark ? '0 20px 40px rgba(0,0,0,0.4)' : '0 20px 40px rgba(15, 23, 42, 0.12)', 'important');
+        }
+
+        // Sync Links and Text Contrast Color States dynamically
+        const mmLinks = mm?.querySelectorAll('.mobile-nav-link');
+        if (mmLinks) {
+          mmLinks.forEach(link => {
+            link.style.setProperty('color', isDark ? '#f1f5f9' : '#0f172a', 'important');
+          });
+        }
+
+        // Update mobile menu icon variant dynamically (Text handling completely removed)
+        const mobileIcon = document.getElementById('darkToggleIconMobile');
+        if (mobileIcon) {
+          mobileIcon.textContent = isDark ? '☀️' : '🌙';
+        }
+      },
+    };
+
+    darkMode.init();
+    document.getElementById('darkToggleDesktop')?.addEventListener('click', () => darkMode.toggle());
+    document.getElementById('darkToggleMobile')?.addEventListener('click', () => darkMode.toggle());
+
+    // Hamburger menu controller — smooth slide-down with backdrop
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileBackdrop = document.getElementById('mobileBackdrop');
+    const menuIcon = menuBtn?.querySelector('svg');
+
+    function closeMobileMenu() {
+      mobileMenu?.classList.remove('open');
+      mobileBackdrop?.classList.remove('open');
+      if (menuIcon) {
+        menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>';
+      }
+      document.body.style.overflow = '';
+    }
+
+    function openMobileMenu() {
+      mobileMenu?.classList.add('open');
+      mobileBackdrop?.classList.add('open');
+      if (menuIcon) {
+        menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>';
+      }
+      document.body.style.overflow = 'hidden';
+    }
+
+    menuBtn?.addEventListener('click', () => {
+      const opening = !mobileMenu.classList.contains('open');
+      if (opening) {
+        openMobileMenu();
+      } else {
+        closeMobileMenu();
+      }
+    });
+    // Close menu on link click — auto-hide drawer and smooth-scroll to section
+    const mobileLinks = document.querySelectorAll('#mobileMenu a, #mobileMenu button.nav-link');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        closeMobileMenu();
+        if (targetId && targetId.startsWith('#') && targetId.length > 1) {
+          e.preventDefault();
+          const targetSection = document.querySelector(targetId);
+          if (targetSection) {
+            const headerOffset = 80;
+            const elementPosition = targetSection.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+              top: elementPosition - headerOffset,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+    // Close on backdrop click
+    mobileBackdrop?.addEventListener('click', closeMobileMenu);
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (mobileMenu?.classList.contains('open') && !e.target.closest('#mobileMenu') && !e.target.closest('#mobileBackdrop') && !e.target.closest('#menuBtn')) {
+        closeMobileMenu();
+      }
+    });
+
+    // Intersection observer layout animations trigger
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal, .reveal-scale').forEach(el => revealObserver.observe(el));
+
+    // Scroll metrics monitors
+    const header = document.querySelector('header');
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      header?.classList.toggle('scrolled', y > 50);
+      backToTop?.classList.toggle('visible', y > 400);
+    });
+    backToTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Count up animation sequence
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target, 10);
+          const suffix = el.dataset.suffix || '';
+          let count = 0;
+          const step = target / 50;
+          const timer = setInterval(() => {
+            count += step;
+            if (count >= target) {
+              clearInterval(timer);
+              el.textContent = target.toLocaleString() + suffix;
+            } else {
+              el.textContent = Math.floor(count).toLocaleString() + suffix;
+            }
+          }, 20);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.stat-number').forEach(el => counterObserver.observe(el));
+
+    // Gallery Dots system
+    const gallery = document.getElementById('scrollGallery');
+    const dotsContainer = document.getElementById('galleryDots');
+    if (gallery && dotsContainer) {
+      const items = gallery.children;
+      const getItemWidth = () => {
+        if (items.length === 0) return 300;
+        const first = items[0];
+        const style = getComputedStyle(gallery);
+        const gap = parseInt(style.gap) || 24;
+        return first.offsetWidth + gap;
+      };
+      Array.from(items).forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => items[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }));
+        dotsContainer.appendChild(dot);
+      });
+      gallery.addEventListener('scroll', () => {
+        const itemWidth = getItemWidth();
+        const idx = Math.round(gallery.scrollLeft / itemWidth);
+        const safeIdx = Math.min(idx, items.length - 1);
+        dotsContainer.querySelectorAll('.gallery-dot').forEach((dot, i) => dot.classList.toggle('active', i === safeIdx));
+      });
+    }
+
+    // FAQ Accordion Interactivity Handler
+    document.querySelectorAll('.faq-toggle').forEach(toggle => {
+      toggle.addEventListener('click', function() {
+        const item = this.parentElement;
+        const isOpen = item.classList.contains('open');
+        const answer = this.nextElementSibling;
+
+        document.querySelectorAll('.faq-item').forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.classList.remove('open');
+            otherItem.querySelector('.faq-toggle').setAttribute('aria-expanded', 'false');
+            otherItem.querySelector('.faq-answer').style.maxHeight = '0';
+          }
+        });
+
+        if (isOpen) {
+          item.classList.remove('open');
+          this.setAttribute('aria-expanded', 'false');
+          answer.style.maxHeight = '0';
+        } else {
+          item.classList.add('open');
+          this.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+
+    // Button click ripple effect handler
+    document.querySelectorAll('.ripple-btn').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = e.clientX - rect.left - size / 2 + 'px';
+        ripple.style.top = e.clientY - rect.top - size / 2 + 'px';
+        this.appendChild(ripple);
+        ripple.addEventListener('animationend', () => ripple.remove());
+      });
+    });
+
+    // ─── Deploy help badge & modal ───
+    const deployBadge = document.getElementById('deployBadge');
+    const deployTrigger = document.getElementById('deployTrigger');
+    const deployModalOverlay = document.getElementById('deployModalOverlay');
+    const deployModalClose = document.getElementById('deployModalClose');
+    const deployDismissPermanent = document.getElementById('deployDismissPermanent');
+
+    deployTrigger?.addEventListener('click', () => {
+      deployModalOverlay?.classList.add('open');
+    });
+
+    function closeDeployModal() {
+      deployModalOverlay?.classList.remove('open');
+    }
+    deployModalClose?.addEventListener('click', closeDeployModal);
+    deployModalOverlay?.addEventListener('click', (e) => {
+      if (e.target === deployModalOverlay) closeDeployModal();
+    });
+
+    deployDismissPermanent?.addEventListener('click', () => {
+      localStorage.setItem('village-verse-deploy-dismissed', 'true');
+      closeDeployModal();
+      deployBadge?.classList.add('dismissed');
+    });
+
+    if (localStorage.getItem('village-verse-deploy-dismissed') === 'true') {
+      deployBadge?.classList.add('dismissed');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && deployModalOverlay?.classList.contains('open')) {
+        closeDeployModal();
+      }
+    });
+
+    // ─── Feedback / Comment System ───
+    (function() {
+
+      const STORAGE_KEY = 'village-verse-feedback';
+      const NAME_KEY = 'village-verse-feedback-name';
+      const VILLAGE_KEY = 'village-verse-feedback-village';
+      const SEED_KEY = 'village-verse-feedback-seeded';
+
+      const SEED_COMMENTS = [
+        {
+          id: 'seed-1',
+          name: 'Ramesh S.',
+          village: 'Sadashivpet',
+          comment: 'This app has transformed how we connect with our local administration. The SOS alert feature gives me peace of mind knowing my family can reach help instantly.',
+          date: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+          badge: 'B+ Blood Donor',
+          rating: 5
+        },
+        {
+          id: 'seed-2',
+          name: 'Kavitha M.',
+          village: 'Narsingi',
+          comment: 'Filed a request about a broken street light on Monday, and I could track it changing to "In Progress" right in the app. Incredible transparency!',
+          date: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
+          badge: 'Verified',
+          rating: 4
+        },
+        {
+          id: 'seed-3',
+          name: 'Anji Reddy',
+          village: 'Sangareddy',
+          comment: 'Clean UI and runs incredibly fast even on low network connection. Looking forward to more community posts!',
+          date: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+          badge: null,
+          rating: 5
+        }
+      ];
+
+      // Feedback system code
+      const nameInput = document.getElementById('feedbackName');
+      const villageInput = document.getElementById('feedbackVillage');
+      const msgInput = document.getElementById('feedbackMsg');
+      const submitBtn = document.getElementById('feedbackSubmitBtn');
+      const feedbackList = document.getElementById('feedbackList');
+      const feedbackEmpty = document.getElementById('feedbackEmpty');
+      const charCount = document.getElementById('feedbackCharCount');
+      const errorEl = document.getElementById('feedbackError');
+      const countEl = document.getElementById('feedbackCount');
+      const avgRatingEl = document.getElementById('avgRatingDisplay');
+      const avgRatingValue = document.getElementById('avgRatingValue');
+      const starRadios = document.querySelectorAll('.star-rating input[name="rating"]');
+      const ratingLabel = document.getElementById('ratingLabel');
+      let selectedRating = 0;
+
+      // Load saved fields
+      const savedName = localStorage.getItem(NAME_KEY);
+      if (savedName) nameInput.value = savedName;
+      const savedVillage = localStorage.getItem(VILLAGE_KEY);
+      if (savedVillage) villageInput.value = savedVillage;
+
+      nameInput.addEventListener('input', function() {
+        localStorage.setItem(NAME_KEY, this.value.trim());
+        validateForm();
+      });
+      villageInput.addEventListener('input', function() {
+        localStorage.setItem(VILLAGE_KEY, this.value.trim());
+      });
+
+      msgInput.addEventListener('input', function() {
+        const len = this.value.length;
+        charCount.textContent = len + ' / 500';
+        validateForm();
+        if (len > 0) errorEl.classList.add('hidden');
+      });
+
+      function validateForm() {
+        const nameOk = nameInput.value.trim().length >= 2;
+        const msgOk = msgInput.value.trim().length >= 3;
+        submitBtn.disabled = !(nameOk && msgOk);
+        return nameOk && msgOk;
+      }
+
+      function getComments() {
+        try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+        catch { return []; }
+      }
+
+      function saveComments(comments) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
+      }
+
+      function seedComments() {
+        const seeded = localStorage.getItem(SEED_KEY);
+        if (seeded) return;
+        const existing = getComments();
+        if (existing.length === 0) {
+          saveComments(SEED_COMMENTS);
+          localStorage.setItem(SEED_KEY, 'true');
+        }
+      }
+
+      function getCommentId() {
+        return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+      }
+
+      function timeAgo(dateStr) {
+        const now = new Date();
+        const date = new Date(dateStr);
+        const diff = Math.floor((now - date) / 1000);
+        if (diff < 60) return 'Just now';
+        if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+        if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+        if (diff < 604800) return Math.floor(diff / 86400) + 'd ago';
+        return date.toLocaleDateString();
+      }
+
+      function getBadgeHtml(badge) {
+        if (!badge) return '<span class="feedback-badge feedback-badge-regular">Community Member</span>';
+        if (badge === 'B+ Blood Donor') {
+          return '<span class="feedback-badge feedback-badge-blood"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> B+ Blood Donor</span>';
+        }
+        if (badge === 'Verified') {
+          return '<span class="feedback-badge feedback-badge-verified"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg> Verified</span>';
+        }
+        return '<span class="feedback-badge feedback-badge-regular">' + escapeHtml(badge) + '</span>';
+      }
+
+      function getStarHtml(rating, size) {
+        const s = size || 14;
+        let html = '<span class="star-display">';
+        for (let i = 1; i <= 5; i++) {
+          if (i <= rating) {
+            html += '<svg class="star-filled" width="' + s + '" height="' + s + '" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
+          } else {
+            html += '<svg class="star-empty" width="' + s + '" height="' + s + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
+          }
+        }
+        html += '</span>';
+        return html;
+      }
+
+      function calcAverageRating(comments) {
+        const ratings = comments.filter(c => typeof c.rating === 'number');
+        if (ratings.length === 0) return 0;
+        const sum = ratings.reduce((acc, c) => acc + c.rating, 0);
+        return sum / ratings.length;
+      }
+
+      function renderComments() {
+        const comments = getComments();
+        const currentName = nameInput.value.trim().toLowerCase();
+
+        const avg = calcAverageRating(comments);
+        if (avg > 0 && avgRatingEl && avgRatingValue) {
+          avgRatingEl.classList.remove('hidden');
+          avgRatingValue.textContent = avg.toFixed(1);
+        } else if (avgRatingEl) {
+          avgRatingEl.classList.add('hidden');
+        }
+
+        feedbackList.querySelectorAll('.feedback-card').forEach(el => el.remove());
+
+        if (comments.length === 0) {
+          feedbackEmpty.classList.remove('hidden');
+          if (countEl) countEl.textContent = '0 reviews';
+          return;
+        }
+
+        feedbackEmpty.classList.add('hidden');
+        if (countEl) countEl.textContent = comments.length + ' review' + (comments.length > 1 ? 's' : '');
+
+        const sorted = [...comments].reverse();
+        sorted.forEach(comment => {
+          const isOwner = comment.name.toLowerCase() === currentName && currentName !== '';
+          const card = document.createElement('div');
+          card.className = 'feedback-card glass-card rounded-2xl p-5 sm:p-6 border-l-4 border-l-blue-500/40';
+
+          const initials = (comment.name.match(/\b\w/g) || []).slice(0, 2).join('').toUpperCase() || '?';
+          const avatarGradients = [
+            'from-blue-500 to-indigo-600', 'from-emerald-500 to-teal-600',
+            'from-violet-500 to-purple-600', 'from-amber-500 to-orange-600',
+            'from-rose-500 to-pink-600', 'from-cyan-500 to-blue-600'
+          ];
+          const avatarGrad = avatarGradients[comment.name.length % avatarGradients.length];
+          const location = comment.village ? '<span class="text-xs text-slate-400">from ' + escapeHtml(comment.village) + '</span>' : '';
+          const stars = comment.rating ? getStarHtml(comment.rating) : '';
+
+          card.innerHTML = `
+            <div class="flex items-start justify-between gap-3">
+              <div class="flex items-center gap-3 min-w-0">
+                <div class="w-11 h-11 rounded-full bg-gradient-to-br ${avatarGrad} flex items-center justify-center text-white font-bold text-sm flex-shrink-0 shadow-sm ring-2 ring-white dark:ring-slate-800">
+                  ${initials}
+                </div>
+                <div class="min-w-0">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <p class="text-sm font-bold text-slate-900 truncate">${escapeHtml(comment.name)}</p>
+                    ${getBadgeHtml(comment.badge)}
+                  </div>
+                  <div class="flex items-center gap-2 mt-0.5">
+                    ${location}
+                    <span class="text-[10px] text-slate-400">·</span>
+                    <span class="text-xs text-slate-400">${timeAgo(comment.date)}</span>
+                  </div>
+                  ${stars ? '<div class="mt-1.5">' + stars + '</div>' : ''}
+                </div>
+              </div>
+              ${isOwner ? '<button class="delete-btn text-slate-300 hover:text-red-500 transition-colors p-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/30" data-id="' + comment.id + '" aria-label="Delete comment"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>' : ''}
+            </div>
+            <p class="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed whitespace-pre-wrap break-words">${escapeHtml(comment.comment)}</p>
+          `;
+          feedbackList.appendChild(card);
+        });
+
+        feedbackList.querySelectorAll('.delete-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const id = this.dataset.id;
+            let comments = getComments();
+            comments = comments.filter(c => c.id !== id);
+            saveComments(comments);
+            renderComments();
+          });
+        });
+      }
+
+      function escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+      }
+
+      // Star rating handler
+      starRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+          selectedRating = parseInt(this.value);
+          ratingLabel.textContent = selectedRating + ' star' + (selectedRating > 1 ? 's' : '');
+          errorEl.classList.add('hidden');
+        });
+      });
+
+      // Submit handler
+      document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = nameInput.value.trim();
+        const village = villageInput.value.trim();
+        const message = msgInput.value.trim();
+
+        if (name.length < 2) {
+          errorEl.textContent = 'Name must be at least 2 characters';
+          errorEl.classList.remove('hidden');
+          nameInput.focus();
+          return;
+        }
+        if (selectedRating === 0) {
+          errorEl.textContent = 'Please select a rating';
+          errorEl.classList.remove('hidden');
+          document.getElementById('star5')?.focus();
+          return;
+        }
+        if (message.length < 3) {
+          errorEl.textContent = 'Feedback must be at least 3 characters';
+          errorEl.classList.remove('hidden');
+          msgInput.focus();
+          return;
+        }
+
+        const comments = getComments();
+        comments.push({
+          id: getCommentId(),
+          name: name,
+          village: village,
+          comment: message,
+          date: new Date().toISOString(),
+          badge: null,
+          rating: selectedRating
+        });
+        saveComments(comments);
+
+        msgInput.value = '';
+        charCount.textContent = '0 / 500';
+        errorEl.classList.add('hidden');
+        submitBtn.disabled = true;
+        selectedRating = 0;
+        starRadios.forEach(r => r.checked = false);
+        ratingLabel.textContent = 'Tap to rate';
+        renderComments();
+      });
+
+      // Enter to submit (Shift+Enter for newline)
+      msgInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          if (!submitBtn.disabled) submitBtn.click();
+        }
+      });
+
+      // Keyboard shortcut for star rating
+      document.addEventListener('keydown', function(e) {
+        if (e.key >= '1' && e.key <= '5') {
+          const tag = document.activeElement?.tagName;
+          if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+          const star = document.getElementById('star' + e.key);
+          if (star) {
+            star.checked = true;
+            star.dispatchEvent(new Event('change'));
+          }
+        }
+      });
+
+      // Init
+      (function init() {
+        validateForm();
+        seedComments();
+        renderComments();
+      })();
+    })();
+</script>
+</body>
+</html>
