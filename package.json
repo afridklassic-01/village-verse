@@ -1,12 +1,11 @@
 {
-  "name": "my-project",
+  "name": "village-verse",
   "version": "1.0.0",
-  "description": "",
-  "main": "fix_submit.js",
+  "description": "Village Verse — Landing page for the community Android app",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tailwindcss -i src/input.css -o style.css --minify",
-    "watch": "tailwindcss -i src/input.css -o style.css --watch"
+    "build:css": "tailwindcss -i input.css -o style.css --minify",
+    "watch:css": "tailwindcss -i input.css -o style.css --watch"
   },
   "keywords": [],
   "author": "",

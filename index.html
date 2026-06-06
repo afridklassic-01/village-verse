@@ -25,6 +25,10 @@
   <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/ffffff?text=Village+Verse" />
 
   <link href="style.css" rel="stylesheet" />
+
+  <!-- Firebase SDK (compat) -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1573,16 +1577,7 @@
                     class="w-full px-4 py-3 sm:py-3.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 dark:placeholder-slate-500 mobile-input-fix"
                   />
                 </div>
-                <div>
-                  <label for="feedbackVillage" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Village / Mandal</label>
-                  <input
-                    type="text"
-                    id="feedbackVillage"
-                    placeholder="e.g. Sadashivpet, Sangareddy..."
-                    maxlength="60"
-                    class="w-full px-4 py-3 sm:py-3.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 dark:placeholder-slate-500 mobile-input-fix"
-                  />
-                </div>
+
                 <div class="star-rating-wrapper">
                   <span class="star-rating-label">Rating</span>
                   <div class="star-rating" id="starRating">
@@ -1892,6 +1887,20 @@
       </button>
     </div>
   </div>
+  <!-- Firebase Firestore initialization -->
+  <script>
+    firebase.initializeApp({
+      apiKey: "AIzaSyB_l_MnvCWSmuH-2fcqee0n-hBoaxgfQ14",
+      authDomain: "village-verse.firebaseapp.com",
+      projectId: "village-verse",
+      storageBucket: "village-verse.firebasestorage.app",
+      messagingSenderId: "662817446357",
+      appId: "1:662817446357:web:2e753d148e92e6acfe855c",
+      measurementId: "G-DLP2010L28"
+    });
+    const db = firebase.firestore();
+  </script>
+
 
   <script>
     // ─── Dark mode manager ───
@@ -2173,47 +2182,12 @@
       }
     });
 
-    // ─── Feedback / Comment System ───
+    // --- Feedback / Comment System (Firestore) ---
     (function() {
 
-      const STORAGE_KEY = 'village-verse-feedback';
-      const NAME_KEY = 'village-verse-feedback-name';
-      const VILLAGE_KEY = 'village-verse-feedback-village';
-      const SEED_KEY = 'village-verse-feedback-seeded';
+      const FEEDBACK_COLLECTION = 'feedback';
 
-      const SEED_COMMENTS = [
-        {
-          id: 'seed-1',
-          name: 'Ramesh S.',
-          village: 'Sadashivpet',
-          comment: 'This app has transformed how we connect with our local administration. The SOS alert feature gives me peace of mind knowing my family can reach help instantly.',
-          date: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
-          badge: 'B+ Blood Donor',
-          rating: 5
-        },
-        {
-          id: 'seed-2',
-          name: 'Kavitha M.',
-          village: 'Narsingi',
-          comment: 'Filed a request about a broken street light on Monday, and I could track it changing to "In Progress" right in the app. Incredible transparency!',
-          date: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
-          badge: 'Verified',
-          rating: 4
-        },
-        {
-          id: 'seed-3',
-          name: 'Anji Reddy',
-          village: 'Sangareddy',
-          comment: 'Clean UI and runs incredibly fast even on low network connection. Looking forward to more community posts!',
-          date: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
-          badge: null,
-          rating: 5
-        }
-      ];
-
-      // Feedback system code
       const nameInput = document.getElementById('feedbackName');
-      const villageInput = document.getElementById('feedbackVillage');
       const msgInput = document.getElementById('feedbackMsg');
       const submitBtn = document.getElementById('feedbackSubmitBtn');
       const feedbackList = document.getElementById('feedbackList');
@@ -2226,19 +2200,13 @@
       const starRadios = document.querySelectorAll('.star-rating input[name="rating"]');
       const ratingLabel = document.getElementById('ratingLabel');
       let selectedRating = 0;
+      let allComments = [];
 
-      // Load saved fields
-      const savedName = localStorage.getItem(NAME_KEY);
+      const savedName = localStorage.getItem('village-verse-feedback-name');
       if (savedName) nameInput.value = savedName;
-      const savedVillage = localStorage.getItem(VILLAGE_KEY);
-      if (savedVillage) villageInput.value = savedVillage;
-
       nameInput.addEventListener('input', function() {
-        localStorage.setItem(NAME_KEY, this.value.trim());
+        localStorage.setItem('village-verse-feedback-name', this.value.trim());
         validateForm();
-      });
-      villageInput.addEventListener('input', function() {
-        localStorage.setItem(VILLAGE_KEY, this.value.trim());
       });
 
       msgInput.addEventListener('input', function() {
@@ -2251,53 +2219,18 @@
       function validateForm() {
         const nameOk = nameInput.value.trim().length >= 2;
         const msgOk = msgInput.value.trim().length >= 3;
-        submitBtn.disabled = !(nameOk && msgOk);
-        return nameOk && msgOk;
+        submitBtn.disabled = !(nameOk && msgOk && selectedRating > 0);
+        return nameOk && msgOk && selectedRating > 0;
       }
 
-      function getComments() {
-        try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
-        catch { return []; }
-      }
-
-      function saveComments(comments) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
-      }
-
-      function seedComments() {
-        const seeded = localStorage.getItem(SEED_KEY);
-        if (seeded) return;
-        const existing = getComments();
-        if (existing.length === 0) {
-          saveComments(SEED_COMMENTS);
-          localStorage.setItem(SEED_KEY, 'true');
-        }
-      }
-
-      function getCommentId() {
-        return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-      }
-
-      function timeAgo(dateStr) {
+      function timeAgo(date) {
         const now = new Date();
-        const date = new Date(dateStr);
         const diff = Math.floor((now - date) / 1000);
         if (diff < 60) return 'Just now';
         if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
         if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
         if (diff < 604800) return Math.floor(diff / 86400) + 'd ago';
         return date.toLocaleDateString();
-      }
-
-      function getBadgeHtml(badge) {
-        if (!badge) return '<span class="feedback-badge feedback-badge-regular">Community Member</span>';
-        if (badge === 'B+ Blood Donor') {
-          return '<span class="feedback-badge feedback-badge-blood"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> B+ Blood Donor</span>';
-        }
-        if (badge === 'Verified') {
-          return '<span class="feedback-badge feedback-badge-verified"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg> Verified</span>';
-        }
-        return '<span class="feedback-badge feedback-badge-regular">' + escapeHtml(badge) + '</span>';
       }
 
       function getStarHtml(rating, size) {
@@ -2315,17 +2248,21 @@
       }
 
       function calcAverageRating(comments) {
-        const ratings = comments.filter(c => typeof c.rating === 'number');
+        const ratings = comments.filter(function(c) { return typeof c.rating === 'number'; });
         if (ratings.length === 0) return 0;
-        const sum = ratings.reduce((acc, c) => acc + c.rating, 0);
+        var sum = ratings.reduce(function(acc, c) { return acc + c.rating; }, 0);
         return sum / ratings.length;
       }
 
-      function renderComments() {
-        const comments = getComments();
-        const currentName = nameInput.value.trim().toLowerCase();
+      function escapeHtml(str) {
+        var div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+      }
 
-        const avg = calcAverageRating(comments);
+      function renderComments() {
+        var comments = allComments;
+        var avg = calcAverageRating(comments);
         if (avg > 0 && avgRatingEl && avgRatingValue) {
           avgRatingEl.classList.remove('hidden');
           avgRatingValue.textContent = avg.toFixed(1);
@@ -2333,7 +2270,8 @@
           avgRatingEl.classList.add('hidden');
         }
 
-        feedbackList.querySelectorAll('.feedback-card').forEach(el => el.remove());
+        var cards = feedbackList.querySelectorAll('.feedback-card');
+        for (var ci = 0; ci < cards.length; ci++) { cards[ci].remove(); }
 
         if (comments.length === 0) {
           feedbackEmpty.classList.remove('hidden');
@@ -2344,80 +2282,81 @@
         feedbackEmpty.classList.add('hidden');
         if (countEl) countEl.textContent = comments.length + ' review' + (comments.length > 1 ? 's' : '');
 
-        const sorted = [...comments].reverse();
-        sorted.forEach(comment => {
-          const isOwner = comment.name.toLowerCase() === currentName && currentName !== '';
-          const card = document.createElement('div');
+        for (var ci = 0; ci < comments.length; ci++) {
+          var comment = comments[ci];
+          var card = document.createElement('div');
           card.className = 'feedback-card glass-card rounded-2xl p-5 sm:p-6 border-l-4 border-l-blue-500/40';
 
-          const initials = (comment.name.match(/\b\w/g) || []).slice(0, 2).join('').toUpperCase() || '?';
-          const avatarGradients = [
+          var initials = (comment.name.match(/\b\w/g) || []).slice(0, 2).join('').toUpperCase() || '?';
+          var avatarGradients = [
             'from-blue-500 to-indigo-600', 'from-emerald-500 to-teal-600',
             'from-violet-500 to-purple-600', 'from-amber-500 to-orange-600',
             'from-rose-500 to-pink-600', 'from-cyan-500 to-blue-600'
           ];
-          const avatarGrad = avatarGradients[comment.name.length % avatarGradients.length];
-          const location = comment.village ? '<span class="text-xs text-slate-400">from ' + escapeHtml(comment.village) + '</span>' : '';
-          const stars = comment.rating ? getStarHtml(comment.rating) : '';
+          var avatarGrad = avatarGradients[comment.name.length % avatarGradients.length];
+          var stars = comment.rating ? getStarHtml(comment.rating) : '';
+          var ts = comment.createdAt;
+          var dateObj = ts && ts.toDate ? ts.toDate() : (ts ? new Date(ts) : new Date());
 
-          card.innerHTML = `
-            <div class="flex items-start justify-between gap-3">
-              <div class="flex items-center gap-3 min-w-0">
-                <div class="w-11 h-11 rounded-full bg-gradient-to-br ${avatarGrad} flex items-center justify-center text-white font-bold text-sm flex-shrink-0 shadow-sm ring-2 ring-white dark:ring-slate-800">
-                  ${initials}
-                </div>
-                <div class="min-w-0">
-                  <div class="flex items-center gap-2 flex-wrap">
-                    <p class="text-sm font-bold text-slate-900 truncate">${escapeHtml(comment.name)}</p>
-                    ${getBadgeHtml(comment.badge)}
-                  </div>
-                  <div class="flex items-center gap-2 mt-0.5">
-                    ${location}
-                    <span class="text-[10px] text-slate-400">·</span>
-                    <span class="text-xs text-slate-400">${timeAgo(comment.date)}</span>
-                  </div>
-                  ${stars ? '<div class="mt-1.5">' + stars + '</div>' : ''}
-                </div>
-              </div>
-              ${isOwner ? '<button class="delete-btn text-slate-300 hover:text-red-500 transition-colors p-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/30" data-id="' + comment.id + '" aria-label="Delete comment"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>' : ''}
-            </div>
-            <p class="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed whitespace-pre-wrap break-words">${escapeHtml(comment.comment)}</p>
-          `;
+          var html = '';
+          html += '<div class="flex items-start justify-between gap-3">';
+          html += '<div class="flex items-center gap-3 min-w-0">';
+          html += '<div class="w-11 h-11 rounded-full bg-gradient-to-br ' + avatarGrad + ' flex items-center justify-center text-white font-bold text-sm flex-shrink-0 shadow-sm ring-2 ring-white dark:ring-slate-800">';
+          html += initials;
+          html += '</div>';
+          html += '<div class="min-w-0">';
+          html += '<div class="flex items-center gap-2 flex-wrap">';
+          html += '<p class="text-sm font-bold text-slate-900 truncate">' + escapeHtml(comment.name) + '</p>';
+          html += '<span class="feedback-badge feedback-badge-regular">Community Member</span>';
+          html += '</div>';
+          html += '<div class="flex items-center gap-2 mt-0.5">';
+          html += '<span class="text-xs text-slate-400">' + timeAgo(dateObj) + '</span>';
+          html += '</div>';
+          if (stars) { html += '<div class="mt-1.5">' + stars + '</div>'; }
+          html += '</div>';
+          html += '</div>';
+          html += '</div>';
+          html += '<p class="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed whitespace-pre-wrap break-words">' + escapeHtml(comment.message) + '</p>';
+
+          card.innerHTML = html;
           feedbackList.appendChild(card);
-        });
+        }
+      }
 
-        feedbackList.querySelectorAll('.delete-btn').forEach(btn => {
-          btn.addEventListener('click', function() {
-            const id = this.dataset.id;
-            let comments = getComments();
-            comments = comments.filter(c => c.id !== id);
-            saveComments(comments);
-            renderComments();
+      // Firestore: Real-time listener
+      db.collection(FEEDBACK_COLLECTION)
+        .orderBy('createdAt', 'desc')
+        .onSnapshot(function(snapshot) {
+          allComments = [];
+          snapshot.forEach(function(doc) {
+            var data = doc.data();
+            data.id = doc.id;
+            allComments.push(data);
           });
+          renderComments();
+        }, function(error) {
+          console.error('Firestore error:', error);
+          var emptyMsg = feedbackEmpty.querySelector('p');
+          if (emptyMsg) emptyMsg.textContent = 'Unable to load reviews. Please try again later.';
+          feedbackEmpty.classList.remove('hidden');
+          if (countEl) countEl.textContent = 'Error loading';
         });
-      }
-
-      function escapeHtml(str) {
-        const div = document.createElement('div');
-        div.textContent = str;
-        return div.innerHTML;
-      }
 
       // Star rating handler
-      starRadios.forEach(radio => {
+      starRadios.forEach(function(radio) {
         radio.addEventListener('change', function() {
           selectedRating = parseInt(this.value);
           ratingLabel.textContent = selectedRating + ' star' + (selectedRating > 1 ? 's' : '');
           errorEl.classList.add('hidden');
+          validateForm();
         });
       });
 
       // Submit handler
       document.getElementById('feedbackForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        const name = nameInput.value.trim();
-        const village = villageInput.value.trim();
-        const message = msgInput.value.trim();
+        var name = nameInput.value.trim();
+        var message = msgInput.value.trim();
 
         if (name.length < 2) {
           errorEl.textContent = 'Name must be at least 2 characters';
@@ -2428,7 +2367,8 @@
         if (selectedRating === 0) {
           errorEl.textContent = 'Please select a rating';
           errorEl.classList.remove('hidden');
-          document.getElementById('star5')?.focus();
+          var star5 = document.getElementById('star5');
+          if (star5) star5.focus();
           return;
         }
         if (message.length < 3) {
@@ -2438,26 +2378,31 @@
           return;
         }
 
-        const comments = getComments();
-        comments.push({
-          id: getCommentId(),
-          name: name,
-          village: village,
-          comment: message,
-          date: new Date().toISOString(),
-          badge: null,
-          rating: selectedRating
-        });
-        saveComments(comments);
-
-        msgInput.value = '';
-        charCount.textContent = '0 / 500';
-        errorEl.classList.add('hidden');
         submitBtn.disabled = true;
-        selectedRating = 0;
-        starRadios.forEach(r => r.checked = false);
-        ratingLabel.textContent = 'Tap to rate';
-        renderComments();
+        submitBtn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20.016l-8.016-8.016 1.406-1.406L12 17.203l6.61-6.609 1.406 1.406L12 20.016zM12 12.016l-8.016-8.016 1.406-1.406L12 9.203l6.61-6.609 1.406 1.406L12 12.016z"/></svg> Submitting...';
+
+        db.collection(FEEDBACK_COLLECTION).add({
+          name: name,
+          rating: selectedRating,
+          message: message,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(function() {
+          msgInput.value = '';
+          charCount.textContent = '0 / 500';
+          errorEl.classList.add('hidden');
+          selectedRating = 0;
+          starRadios.forEach(function(r) { r.checked = false; });
+          ratingLabel.textContent = 'Tap to rate';
+          submitBtn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20.016l-8.016-8.016 1.406-1.406L12 17.203l6.61-6.609 1.406 1.406L12 20.016zM12 12.016l-8.016-8.016 1.406-1.406L12 9.203l6.61-6.609 1.406 1.406L12 12.016z"/></svg> Submit Feedback';
+          submitBtn.disabled = true;
+          validateForm();
+        }).catch(function(err) {
+          console.error('Error saving feedback:', err);
+          errorEl.textContent = 'Failed to submit. Please check your connection and try again.';
+          errorEl.classList.remove('hidden');
+          submitBtn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20.016l-8.016-8.016 1.406-1.406L12 17.203l6.61-6.609 1.406 1.406L12 20.016zM12 12.016l-8.016-8.016 1.406-1.406L12 9.203l6.61-6.609 1.406 1.406L12 12.016z"/></svg> Submit Feedback';
+          submitBtn.disabled = false;
+        });
       });
 
       // Enter to submit (Shift+Enter for newline)
@@ -2468,12 +2413,12 @@
         }
       });
 
-      // Keyboard shortcut for star rating
+      // Keyboard shortcut for star rating (1-5)
       document.addEventListener('keydown', function(e) {
         if (e.key >= '1' && e.key <= '5') {
-          const tag = document.activeElement?.tagName;
+          var tag = document.activeElement ? document.activeElement.tagName : '';
           if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
-          const star = document.getElementById('star' + e.key);
+          var star = document.getElementById('star' + e.key);
           if (star) {
             star.checked = true;
             star.dispatchEvent(new Event('change'));
@@ -2482,11 +2427,7 @@
       });
 
       // Init
-      (function init() {
-        validateForm();
-        seedComments();
-        renderComments();
-      })();
+      validateForm();
     })();
 </script>
 </body>
