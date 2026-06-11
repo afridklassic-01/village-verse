@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Village Verse – Empowering Your Community</title>
-  <meta name="description" content="Village Verse is a community-first Android application for rural India — connecting villagers with local administration, emergency services, SOS alerts, and complaint tracking." />
-  <meta name="keywords" content="Village Verse, rural app, community app, SOS alerts, emergency services, complaint tracking, India, village" />
-  <meta name="author" content="Village Verse Team" />
+  <title>SATS – Smart Assistance and Tracking System</title>
+  <meta name="description" content="SATS is a community-first Android application for rural India — connecting villagers with local administration, emergency services, SOS alerts, and complaint tracking." />
+  <meta name="keywords" content="SATS, rural app, community app, SOS alerts, emergency services, complaint tracking, India, village" />
+  <meta name="author" content="SATS Team" />
   <meta name="robots" content="index, follow" />
 
   <!-- Open Graph / Social Share Preview -->
-  <meta property="og:title" content="Village Verse – Empowering Your Community, Connected Locally" />
-  <meta property="og:description" content="Your one-stop app for local connection, comprehensive safety options, SOS alerts, verified profiles, and raising public voice in rural India." />
-  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/ffffff?text=Village+Verse" />
+  <meta property="og:title" content="SATS – Smart Assistance and Tracking System, Connected Locally" />
+  <meta property="og:description" content="Your smart platform for emergency assistance, real-time tracking, SOS alerts, verified profiles, and community connection in rural India." />
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/ffffff?text=SATS" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:type" content="website" />
@@ -20,16 +20,15 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Village Verse – Empowering Your Community" />
-  <meta name="twitter:description" content="Your one-stop app for local connection, SOS alerts, verified profiles, and public voice in rural India." />
-  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/ffffff?text=Village+Verse" />
+  <meta name="twitter:title" content="SATS – Smart Assistance and Tracking System" />
+  <meta name="twitter:description" content="Your smart platform for emergency assistance, real-time tracking, SOS alerts, and community connection in rural India." />
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/ffffff?text=SATS" />
 
   <link href="style.css" rel="stylesheet" />
 
   <!-- Firebase SDK (compat) -->
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -295,20 +294,7 @@
       .scroll-gallery .phone-mockup { filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.05)); }
     }
 
-    /* ── Logo mark ── */
-    .logo-mark {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 34px;
-      height: 34px;
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      border-radius: 10px;
-      color: #fff;
-      font-weight: 800;
-      font-size: 18px;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
-    }
+
 
     /* ── Feature icon circles ── */
     .feature-icon {
@@ -539,6 +525,7 @@
     .stagger-1 { transition-delay: 0.1s; }
     .stagger-2 { transition-delay: 0.2s; }
     .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
 
     /* ── Back-to-top button ── */
     .back-to-top {
@@ -818,6 +805,8 @@
       color: #64748b;
     }
 
+    
+
 
     /* Dark mode: suppress white backgrounds on click/tap */
     .dark * { -webkit-tap-highlight-color: transparent; }
@@ -834,189 +823,11 @@
     .dark .nav-link:active,
     .dark .gallery-dot:active,
     .dark .back-to-top:active,
-    .dark .phone-app-footer-item:active,
-    .dark .deploy-badge-trigger:active {
+    .dark .phone-app-footer-item:active {
       background-color: transparent !important;
     }
 
-    /* ── Deployment help badge ── */
-    .deploy-badge {
-      position: fixed;
-      bottom: 88px;
-      right: 28px;
-      z-index: 998;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .deploy-badge-trigger {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 14px;
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      color: #e2e8f0;
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 600;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-      transition: all 0.3s ease;
-    }
-    .deploy-badge-trigger:hover {
-      background: rgba(15, 23, 42, 1);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    }
-    .dark .deploy-badge-trigger {
-      background: rgba(226, 232, 240, 0.15);
-      border-color: rgba(148, 163, 184, 0.15);
-    }
-    .dark .deploy-badge-trigger:hover {
-      background: rgba(226, 232, 240, 0.2);
-    }
-    .deploy-badge.dismissed { opacity: 0; transform: scale(0.8); pointer-events: none; }
 
-    /* Deployment modal overlay */
-    .deploy-modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .deploy-modal-overlay.open {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .deploy-modal {
-      background: #fff;
-      border-radius: 24px;
-      max-width: 480px;
-      width: 100%;
-      padding: 32px 28px 28px;
-      box-shadow: 0 32px 64px rgba(0, 0, 0, 0.2);
-      transform: translateY(20px) scale(0.95);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
-    }
-    .deploy-modal-overlay.open .deploy-modal {
-      transform: translateY(0) scale(1);
-    }
-    .dark .deploy-modal {
-      background: #1e293b;
-      border: 1px solid rgba(148, 163, 184, 0.12);
-    }
-    .deploy-modal h3 {
-      font-size: 18px;
-      font-weight: 800;
-      color: #0f172a;
-      margin-bottom: 4px;
-    }
-
-    .deploy-modal .subtitle {
-      font-size: 12px;
-      color: #64748b;
-      margin-bottom: 20px;
-    }
-    .deploy-step {
-      display: flex;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid #f1f5f9;
-    }
-    .dark .deploy-step { border-color: #1e293b; }
-    .deploy-step:last-child { border-bottom: none; }
-    .deploy-step-num {
-      width: 28px;
-      height: 28px;
-      border-radius: 10px;
-      background: #2563eb;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 800;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .deploy-step-content h4 {
-      font-size: 13px;
-      font-weight: 700;
-      color: #0f172a;
-      margin-bottom: 2px;
-    }
-
-    .deploy-step-content p {
-      font-size: 11px;
-      color: #64748b;
-      line-height: 1.5;
-    }
-    .deploy-step-content code {
-      font-size: 10px;
-      background: #f1f5f9;
-      padding: 1px 6px;
-      border-radius: 4px;
-      color: #2563eb;
-      font-weight: 600;
-      font-family: 'Inter', monospace;
-    }
-    .dark .deploy-step-content code {
-      background: #0f172a;
-    }
-    .deploy-modal-close {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      border: none;
-      background: #f1f5f9;
-      color: #64748b;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-    }
-    .deploy-modal-close:hover { background: #e2e8f0; color: #0f172a; }
-    .dark .deploy-modal-close { background: #334155; }
-    .dark .deploy-modal-close:hover { background: #475569; }
-    .deploy-modal-dismiss {
-      width: 100%;
-      margin-top: 16px;
-      padding: 10px;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      background: transparent;
-      color: #64748b;
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .deploy-modal-dismiss:hover { background: #f8fafc; border-color: #cbd5e1; color: #0f172a; }
-    .dark .deploy-modal-dismiss { border-color: #334155; }
-    .dark .deploy-modal-dismiss:hover { background: #1e293b; border-color: #475569; }
-
-    @media (max-width: 640px) {
-      .deploy-badge { bottom: 76px; right: 20px; }
-      .deploy-badge-trigger { padding: 6px 12px; font-size: 10px; }
-      .deploy-modal { padding: 24px 20px 20px; }
-    }
 
     html.theme-transition * { transition: background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important; }
     html.theme-transition *:active { transition: none !important; }
@@ -1048,7 +859,7 @@
 
     /* Better touch targets for mobile */
     @media (pointer: coarse) {
-      .nav-link, .phone-app-footer-item, .gallery-dot, .faq-toggle, .deploy-badge-trigger {
+      .nav-link, .phone-app-footer-item, .gallery-dot, .faq-toggle {
         min-height: 44px;
       }
       .delete-btn {
@@ -1165,9 +976,9 @@
       <div class="glass-card mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16 sm:h-18">
           <a href="#" class="flex items-center gap-3 group">
-            <span class="logo-mark transition-transform group-hover:scale-105">V</span>
+            <img src="village_one_logo.png" alt="SATS" class="h-11 w-auto rounded-xl shadow-md shadow-blue-200/50 dark:shadow-blue-950/40 transition-transform group-hover:scale-105" />
             <span class="hidden sm:block text-lg font-bold tracking-tight text-slate-900">
-              Village <span class="text-blue-600">Verse</span>
+              <span class="text-blue-600">SATS</span>
             </span>
           </a>
 
@@ -1186,7 +997,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/>
               </svg>
             </button>
-            <a href="YOUR_DIRECT_APK_CLOUD_LINK" class="ripple-btn inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-blue-200 hover:shadow-blue-300 dark:shadow-blue-950/40 dark:hover:shadow-blue-900/50">
+            <a href="sats.apk" data-track-download="true" class="ripple-btn inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-blue-200 hover:shadow-blue-300 dark:shadow-blue-950/40 dark:hover:shadow-blue-900/50">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
               Download APK
             </a>
@@ -1225,21 +1036,28 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div class="text-center lg:text-left">
-            <span class="hero-stagger hero-badge inline-block px-4 py-1.5 mb-5 text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 rounded-full">
-              🚀 Active App Project v1.0.0
-            </span>
-            <h1 class="hero-stagger hero-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight">
-              Village Verse:<br />
-              <span class="text-blue-600">Empowering Your Community</span>, Connected Locally
-            </h1>
+            <div class="hero-stagger hero-badge flex items-center justify-center gap-2">
+              <span class="inline-block px-4 py-1.5 text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 rounded-full">
+                🚀 SATS v1.0.0
+              </span>
+            </div>
+            <div class="hero-stagger hero-heading flex flex-col items-center lg:items-start mt-2">
+              <div class="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 mb-4">
+                <img src="village_one_logo.png" alt="SATS" class="w-48 h-48 sm:w-52 sm:h-52 md:w-56 md:h-56 lg:w-60 lg:h-60 rounded-3xl shadow-2xl shadow-blue-200/50 dark:shadow-blue-950/40 ring-2 ring-white/80 dark:ring-slate-800/80" />
+                <div class="text-center sm:text-left">
+                  <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight">
+                    SATS<br />
+                    <span class="text-blue-600">Smart Assistance and Tracking System</span>, Connected Locally
+                  </h1>
+                </div>
+              </div>
+            </div>
             <p class="hero-stagger hero-subtitle mt-5 text-base sm:text-lg text-slate-500 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-              Your one-stop app for local connection, comprehensive safety options, and raising public voice.
+              Your smart platform for emergency assistance, real-time tracking, and community connection.
             </p>
             <div class="hero-stagger hero-buttons mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <a href="YOUR_DIRECT_APK_CLOUD_LINK" class="ripple-btn w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-2xl transition-all shadow-xl shadow-blue-200 hover:shadow-blue-300 dark:shadow-blue-950/40 dark:hover:shadow-blue-900/50 hover:scale-[1.02] active:scale-[0.98]">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                Download APK (v1.0.0, 18MB)
-              </a>
+              <a href="sats.apk" data-track-download="true" class="ripple-btn w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-2xl transition-all shadow-xl shadow-blue-200 hover:shadow-blue-300 dark:shadow-blue-950/40 dark:hover:shadow-blue-900/50 hover:scale-[1.02] active:scale-[0.98]">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Download APK</a>
               <a href="#features" class="ripple-btn w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 text-slate-700 bg-white border border-slate-200 hover:border-blue-200 hover:text-blue-600 font-medium rounded-2xl transition-all shadow-sm hover:shadow-md">
                 Explore Features
               </a>
@@ -1257,7 +1075,7 @@
                   </div>
                 </div>
                 <div class="phone-app-navbar">
-                  <h4>Village Assistance</h4>
+                  <h4>SATS Assistance</h4>
                 </div>
                 <div class="phone-content bg-slate-50 dark:bg-slate-900">
                   <div class="bg-blue-500 rounded-2xl p-4 text-white shadow-md">
@@ -1307,7 +1125,7 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
           <span class="inline-block px-4 py-1.5 mb-3 text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 rounded-full">Features</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Everything Your Village Needs</h2>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Smart Features for Every Need</h2>
         </div>
 
         <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-20 reveal">
@@ -1320,7 +1138,7 @@
             <div class="phone-mockup phone-feature">
               <div class="phone-screen">
                 <div class="status-bar"><span class="time">12:30</span><span class="text-[8px]">5G</span></div>
-                <div class="phone-app-navbar"><h4>Village Assistance</h4></div>
+                <div class="phone-app-navbar"><h4>SATS Assistance</h4></div>
                 <div class="phone-content bg-slate-50 dark:bg-slate-900">
                   <p class="text-[10px] font-bold text-slate-700">Emergency Services</p>
                   <div class="space-y-2 mt-2">
@@ -1411,7 +1229,7 @@
             <div class="phone-mockup phone-feature">
               <div class="phone-screen">
                 <div class="status-bar"><span class="time">12:30</span><span class="text-[8px]">5G</span></div>
-                <div class="phone-app-navbar"><h4>Village Assistance</h4></div>
+                <div class="phone-app-navbar"><h4>SATS Assistance</h4></div>
                 <div class="phone-content bg-white dark:bg-slate-900 px-3">
                   <p class="text-[11px] font-bold text-blue-900 text-center">Complaints Dashboard</p>
                   <div class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 rounded-lg p-1.5 mt-1 text-[7px] text-slate-400">🔍 Search complaints...</div>
@@ -1452,18 +1270,18 @@
         <div class="text-center mb-12">
           <span class="inline-block px-4 py-1.5 mb-3 text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 rounded-full">FAQ</span>
           <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
-          <p class="mt-3 text-slate-500 max-w-xl mx-auto">Everything you need to know about Village Verse</p>
+          <p class="mt-3 text-slate-500 max-w-xl mx-auto">Everything you need to know about SATS</p>
         </div>
         <div class="glass-card rounded-2xl overflow-hidden divide-y divide-slate-100" id="faqAccordion">
 
           <div class="faq-item open">
             <button class="faq-toggle" aria-expanded="true">
-              <span>What is Village Verse and how does it work?</span>
+              <span>What is SATS and how does it work?</span>
               <span class="faq-arrow text-slate-400 text-lg transition-transform duration-300">▼</span>
             </button>
             <div class="faq-answer style="max-height: 200px;"">
               <div class="faq-answer-inner">
-                Village Verse is a community-first Android application designed for rural India. It connects villagers with local administration, emergency services, and neighbors — all in one secure platform. From SOS alerts and verified profiles to community discussions and transparent complaint tracking, every feature is built with grassroots communities in mind.
+                SATS is a community-first Android application designed for rural India. It connects villagers with local administration, emergency services, and neighbors — all in one secure platform. From SOS alerts and verified profiles to community discussions and transparent complaint tracking, every feature is built with grassroots communities in mind.
               </div>
             </div>
           </div>
@@ -1475,7 +1293,7 @@
             </button>
             <div class="faq-answer">
               <div class="faq-answer-inner">
-                Yes, Village Verse is completely free to download and use. There are no hidden charges, subscription fees, or in-app purchases required. Simply download the APK, enable installation from unknown sources in your device settings, and you're ready to go.
+                Yes, SATS is completely free to download and use. There are no hidden charges, subscription fees, or in-app purchases required. Simply download the APK, enable installation from unknown sources in your device settings, and you're ready to go.
               </div>
             </div>
           </div>
@@ -1499,7 +1317,7 @@
             </button>
             <div class="faq-answer">
               <div class="faq-answer-inner">
-                Absolutely. Privacy is at the core of Village Verse. Your personal data is encrypted both in transit and at rest. We never share your information with third parties without your explicit consent. Profile details like your village, mandal, and blood group are only visible to verified community members you choose to connect with.
+                Absolutely. Privacy is at the core of SATS. Your personal data is encrypted both in transit and at rest. We never share your information with third parties without your explicit consent. Profile details like your village, mandal, and blood group are only visible to verified community members you choose to connect with.
               </div>
             </div>
           </div>
@@ -1530,7 +1348,7 @@
 
           <div class="faq-item">
             <button class="faq-toggle" aria-expanded="false">
-              <span>Can I use Village Verse offline?</span>
+              <span>Can I use SATS offline?</span>
               <span class="faq-arrow text-slate-400 text-lg transition-transform duration-300">▼</span>
             </button>
             <div class="faq-answer">
@@ -1609,7 +1427,7 @@
                   <textarea
                     id="feedbackMsg"
                     rows="4"
-                    placeholder="Write your thoughts about Village Verse..."
+                    placeholder="Write your thoughts about SATS..."
                     maxlength="500"
                     class="w-full px-4 py-3 sm:py-3.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 dark:placeholder-slate-500 mobile-input-fix"
                   ></textarea>
@@ -1668,7 +1486,7 @@
         <div class="text-center mb-10">
           <span class="inline-block px-4 py-1.5 mb-3 text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 rounded-full">Gallery</span>
           <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">App Interface Showcase</h2>
-          <p class="mt-2 text-slate-500 text-sm">Scroll horizontally to overview the verified operational layout</p>
+          <p class="mt-2 text-slate-500 text-sm">Swipe through to explore the SATS app interface</p>
         </div>
 
         <div class="scroll-gallery-wrapper">
@@ -1699,7 +1517,7 @@
             <div class="phone-mockup phone-gallery">
               <div class="phone-screen">
                 <div class="status-bar"><span class="time">9:41</span><span class="text-[7px]">5G</span></div>
-                <div class="phone-app-navbar"><h4>Village Assistance</h4></div>
+                <div class="phone-app-navbar"><h4>SATS Assistance</h4></div>
                 <div class="phone-content bg-slate-50 dark:bg-slate-900">
                   <div class="bg-gradient-to-r from-blue-500 to-indigo-600 p-3 rounded-xl text-white">
                     <p class="text-[10px] font-bold">Good Afternoon, user 👋</p>
@@ -1747,7 +1565,7 @@
             <div class="phone-mockup phone-gallery">
               <div class="phone-screen">
                 <div class="status-bar"><span class="time">9:41</span><span class="text-[7px]">5G</span></div>
-                <div class="phone-app-navbar"><h4>Village Assistance</h4></div>
+                <div class="phone-app-navbar"><h4>SATS Assistance</h4></div>
                 <div class="phone-content bg-slate-50 dark:bg-slate-900">
                   <p class="text-[10px] font-bold text-center text-slate-700">Complaints Dashboard</p>
                   <div class="border rounded-md p-1 bg-white dark:bg-slate-800 text-[7px] text-slate-400 mt-1">Search complaints...</div>
@@ -1781,7 +1599,7 @@
         <span class="inline-block px-4 py-1.5 mb-3 text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 rounded-full">About</span>
         <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 reveal">Engineered for Rural Advancement</h2>
         <p class="mt-4 text-slate-500 leading-relaxed max-w-xl mx-auto text-sm">
-          Village Verse acts as a core connecting asset for rural networks across India, prioritizing data security, localized utility configurations, and rapid emergency alerts deployment.
+          SATS acts as a core connecting asset for rural networks across India, prioritizing data security, localized utility configurations, and rapid emergency alerts deployment.
         </p>
 
         <div class="grid sm:grid-cols-3 gap-6 mt-12">
@@ -1809,26 +1627,17 @@
         <div class="glass-card rounded-3xl p-8 sm:p-12 md:p-16">
           <span class="inline-block px-4 py-1.5 mb-4 text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 rounded-full">Get Started</span>
           <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
-            Ready to secure your <span class="text-blue-600">Village Verse</span> connection?
+            Click here to install SATS and get connected with your community
           </h2>
-          <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="YOUR_DIRECT_APK_CLOUD_LINK" class="ripple-btn w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg rounded-2xl transition-all shadow-xl shadow-blue-200 hover:shadow-blue-300 dark:shadow-blue-950/40 dark:hover:shadow-blue-900/50">
+          <div class="mt-8 flex flex-col items-center gap-4">
+            <a href="sats.apk" data-track-download="true" class="ripple-btn w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg rounded-2xl transition-all shadow-xl shadow-blue-200 hover:shadow-blue-300 dark:shadow-blue-950/40 dark:hover:shadow-blue-900/50">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-              Download APK (v1.0.0, 18MB)
+              Download APK
             </a>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- ── Deploy help badge (dev only) ── -->
-    <div id="deployBadge" class="deploy-badge">
-      <button id="deployTrigger" class="deploy-badge-trigger" aria-label="Deployment help">
-        <span>⚡</span>
-        <span>Deploy Ready</span>
-        <svg class="w-3 h-3 opacity-60" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-      </button>
-    </div>
 
     <button id="backToTop" class="back-to-top" aria-label="Scroll to top">
       <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m0 0l-7 7m7-7l7 7"/></svg>
@@ -1837,56 +1646,16 @@
     <footer class="border-t border-slate-100 bg-white/80 dark:bg-slate-950 dark:border-slate-800">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-3">
-          <span class="logo-mark text-sm">V</span>
-          <span class="text-sm font-bold text-slate-700 dark:text-slate-300">Village <span class="text-blue-600">Verse</span></span>
+          <img src="village_one_logo.png" alt="SATS" class="h-10 w-auto rounded-xl shadow-sm shadow-blue-200/30 dark:shadow-blue-950/30" />
+          <span class="text-sm font-bold text-slate-700 dark:text-slate-300"><span class="text-blue-600">SATS</span></span>
         </div>
         <p class="text-xs text-slate-400">
-          &copy; 2026 Village Verse. Dedicated local administrative system utility.
+          &copy; 2026 SATS. Your smart assistance and tracking companion.
         </p>
       </div>
     </footer>
   </div>
 
-  <!-- ── Deployment help modal overlay ── -->
-  <div id="deployModalOverlay" class="deploy-modal-overlay">
-    <div class="deploy-modal">
-      <button id="deployModalClose" class="deploy-modal-close" aria-label="Close modal">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-      </button>
-      <h3>🚀 Deploy to Production</h3>
-      <p class="subtitle">This single HTML file is ready for zero-configuration hosting.</p>
-
-      <div class="deploy-step">
-        <span class="deploy-step-num">1</span>
-        <div class="deploy-step-content">
-          <h4>Option A — Netlify (Drag & Drop)</h4>
-          <p>Go to <strong>netlify.com</strong> → Log in → Drag <code>index.html</code> onto the deploy area. Your site goes live instantly at a <code>*.netlify.app</code> URL.</p>
-        </div>
-      </div>
-
-      <div class="deploy-step">
-        <span class="deploy-step-num">2</span>
-        <div class="deploy-step-content">
-          <h4>Option B — GitHub Pages</h4>
-          <p>Push this file to a GitHub repo → Settings → Pages → Deploy from <code>main</code> branch. Your site will be available at <code>your-username.github.io/repo-name</code>.</p>
-        </div>
-      </div>
-
-      <div class="deploy-step">
-        <span class="deploy-step-num">3</span>
-        <div class="deploy-step-content">
-          <h4>Option C — Vercel</h4>
-          <p>Go to <strong>vercel.com</strong> → Import project → Select this file. Vercel auto-detects static HTML and deploys with a CDN-backed <code>*.vercel.app</code> link.</p>
-        </div>
-      </div>
-
-      <p class="subtitle" style="margin-top: 12px;"><strong>Before deploying:</strong> Replace <code>YOUR_DIRECT_APK_CLOUD_LINK</code> with your actual APK download URL (Google Drive, GitHub Releases, etc.).</p>
-
-      <button id="deployDismissPermanent" class="deploy-modal-dismiss">
-        Don't show this again
-      </button>
-    </div>
-  </div>
   <!-- Firebase Firestore initialization -->
   <script>
     firebase.initializeApp({
@@ -1905,11 +1674,10 @@
   <script>
     // ─── Dark mode manager ───
     const darkMode = {
-      key: 'village-verse-theme',
+      key: 'sats-theme',
       init() {
         const stored = localStorage.getItem(this.key);
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const isDark = stored === 'dark' || (!stored && prefersDark);
+        const isDark = stored === 'dark';
         document.documentElement.classList.add('disable-transitions');
         this.apply(isDark);
         this.updateUI(isDark);
@@ -2147,41 +1915,6 @@
       });
     });
 
-    // ─── Deploy help badge & modal ───
-    const deployBadge = document.getElementById('deployBadge');
-    const deployTrigger = document.getElementById('deployTrigger');
-    const deployModalOverlay = document.getElementById('deployModalOverlay');
-    const deployModalClose = document.getElementById('deployModalClose');
-    const deployDismissPermanent = document.getElementById('deployDismissPermanent');
-
-    deployTrigger?.addEventListener('click', () => {
-      deployModalOverlay?.classList.add('open');
-    });
-
-    function closeDeployModal() {
-      deployModalOverlay?.classList.remove('open');
-    }
-    deployModalClose?.addEventListener('click', closeDeployModal);
-    deployModalOverlay?.addEventListener('click', (e) => {
-      if (e.target === deployModalOverlay) closeDeployModal();
-    });
-
-    deployDismissPermanent?.addEventListener('click', () => {
-      localStorage.setItem('village-verse-deploy-dismissed', 'true');
-      closeDeployModal();
-      deployBadge?.classList.add('dismissed');
-    });
-
-    if (localStorage.getItem('village-verse-deploy-dismissed') === 'true') {
-      deployBadge?.classList.add('dismissed');
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && deployModalOverlay?.classList.contains('open')) {
-        closeDeployModal();
-      }
-    });
-
     // --- Feedback / Comment System (Firestore) ---
     (function() {
 
@@ -2202,10 +1935,10 @@
       let selectedRating = 0;
       let allComments = [];
 
-      const savedName = localStorage.getItem('village-verse-feedback-name');
+      const savedName = localStorage.getItem('sats-feedback-name');
       if (savedName) nameInput.value = savedName;
       nameInput.addEventListener('input', function() {
-        localStorage.setItem('village-verse-feedback-name', this.value.trim());
+        localStorage.setItem('sats-feedback-name', this.value.trim());
         validateForm();
       });
 

@@ -1,7 +1,7 @@
 {
-  "name": "village-verse",
+  "name": "village-one",
   "version": "1.0.0",
-  "description": "Village Verse — Landing page for the community Android app",
+  "description": "Village One — Landing page for the community Android app",
   "private": true,
   "scripts": {
     "build:css": "tailwindcss -i input.css -o style.css --minify",
